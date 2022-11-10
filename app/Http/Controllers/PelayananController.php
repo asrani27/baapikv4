@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\M_diagnosa;
 use Carbon\Carbon;
 use App\Models\M_poli;
 use App\Models\T_pelayanan;
@@ -56,5 +57,15 @@ class PelayananController extends Controller
         $poli = M_poli::get();
         request()->flash();
         return view('admin.pelayanan.index', compact('data', 'poli'));
+    }
+
+    public function getDiagnosa(Request $req)
+    {
+        if ($req->searchTerm == null) {
+            $data = null;
+        } else {
+            $data = M_diagnosa::where('nmDiag', 'LIKE', $req->searchTerm . '%')->get()->take(10)->toArray();
+            return json_encode($data);
+        }
     }
 }

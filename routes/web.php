@@ -93,6 +93,7 @@ Route::group(['middleware' => ['auth', 'role:superadmin']], function () {
     Route::get('superadmin/pendaftaran/delete/{id}', [PendaftaranController::class, 'delete']);
 
     Route::get('superadmin/pelayanan', [PelayananController::class, 'index']);
+    Route::post('superadmin/pelayanan/getDiagnosa', [PelayananController::class, 'getDiagnosa']);
     Route::get('superadmin/pelayanan/filter', [PelayananController::class, 'filter']);
     Route::get('superadmin/pelayanan/periksa/{id}', [PelayananController::class, 'periksa']);
     Route::post('superadmin/pelayanan/periksa/{id}', [PelayananController::class, 'updateStatusPulang']);

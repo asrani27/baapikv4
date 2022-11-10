@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @push('css')
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 <!-- Select2 -->
 <link rel="stylesheet" href="/assets/bower_components/select2/dist/css/select2.min.css">
     
@@ -23,12 +24,15 @@
                         <div class="form-group">
                           <label class="col-sm-2 control-label">Diagnosa</label>
                           <div class="col-sm-10">
-                            <select class="form-control select2" name="kdDiag" style="width: 100%;" required>
+                            <select id="selDiag" class="form-control form-control-sm select2 selDiag" name="kdDiag">
+                              
+                            </select>
+                            {{-- <select class="form-control select2" name="kdDiag" style="width: 100%;" required>
                                 <option value="">-Pilih-</option>
                                 @foreach ($diag as $item)
                                     <option value="{{$item->kdDiag}}">{{$item->kdDiag}}-{{$item->nmDiag}}</option>
                                 @endforeach
-                            </select>
+                            </select> --}}
                           </div>
                         </div>
                         <div class="form-group">
@@ -93,4 +97,34 @@
       $('.select2').select2()
     })
 </script>
+<script>
+  $(document).ready(function(){
+       $("#selDiag").select2({
+          placeholder: '-Pilih-',
+          ajax: { 
+          url: '/superadmin/pelayanan/getDiagnosa',
+          type: "post",
+          dataType: 'json',
+          delay: 250,
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          data: function (params) {
+              return {
+              searchTerm: params.term // search term
+              };
+          },
+          processResults: function (response) {
+            console.log(response);
+              var data_array = [];
+                      response.forEach(function(value,key){
+                  data_array.push({id:value.id,text:value.kdDiag+' - '+value.nmDiag})
+              });
+              return {
+                  results: data_array
+              };
+          },
+          cache: true
+          }
+      });
+  });
+  </script>
 @endpush
