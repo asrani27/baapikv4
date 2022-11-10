@@ -38,4 +38,10 @@ class TindakanController extends Controller
         Session::flash('success', 'Data Di Simpan');
         return back();
     }
+    public function deleteD($id, $id_tindakan)
+    {
+        T_tindakan::find($id_tindakan)->delete();
+        Session::flash('success', 'Data Di hapus');
+        return back();
+    }
 }
