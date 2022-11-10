@@ -24,31 +24,31 @@
         <div class="form-group">
             <label for="inputEmail3" class="col-sm-2 control-label">User Pcare</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="user_pcare_dev" placeholder="NIK" value="{{$data == null ? '': $data->user_pcare_dev}}">
+              <input type="text" class="form-control" name="user_pcare_dev" placeholder="user_pcare_dev" value="{{$data == null ? '': $data->user_pcare_dev}}">
             </div>
         </div>
         <div class="form-group">
             <label for="inputEmail3" class="col-sm-2 control-label">Pass Pcare</label>
             <div class="col-sm-10">
-              <input type="password" class="form-control" name="pass_pcare_dev" placeholder="Nama" value="{{$data == null ? '': $data->pass_pcare_dev}}">
+              <input type="password" class="form-control" name="pass_pcare_dev" placeholder="pass_pcare_dev" value="{{$data == null ? '': $data->pass_pcare_dev}}">
             </div>
         </div>
         <div class="form-group">
             <label for="inputEmail3" class="col-sm-2 control-label">Cons ID</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="cons_id_dev" placeholder="Nama" value="{{$data == null ? '': $data->cons_id_dev}}">
+              <input type="text" class="form-control" name="cons_id_dev" placeholder="cons_id_dev" value="{{$data == null ? '': $data->cons_id_dev}}">
             </div>
         </div>
         <div class="form-group">
             <label for="inputEmail3" class="col-sm-2 control-label">Secret Key</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" name="secret_key_dev" placeholder="Nama" value="{{$data == null ? '': $data->secret_key_dev}}">
+              <input type="text" class="form-control" name="secret_key_dev" placeholder="secret_key_dev" value="{{$data == null ? '': $data->secret_key_dev}}">
             </div>
         </div>
         <div class="form-group">
             <label for="inputEmail3" class="col-sm-2 control-label">User Key</label>
             <div class="col-sm-10">
-              <input type="password" class="form-control" name="user_key" placeholder="Nama" value="{{$data == null ? '': $data->user_key}}">
+              <input type="password" class="form-control" name="user_key" placeholder="user_key" value="{{$data == null ? '': $data->user_key}}">
             </div>
         </div>
     </div>
