@@ -64,7 +64,7 @@ class PelayananController extends Controller
         if ($req->searchTerm == null) {
             $data = null;
         } else {
-            $data = M_diagnosa::where('nmDiag', 'LIKE', $req->searchTerm . '%')->get()->take(10)->toArray();
+            $data = M_diagnosa::where('nmDiag', 'LIKE', '%' . $req->searchTerm . '%')->orWhere('kdDiag', 'LIKE', '%' . $req->searchTerm . '%')->get()->take(10)->toArray();
             return json_encode($data);
         }
     }
