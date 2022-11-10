@@ -131,7 +131,7 @@
               </div>
               <div class="box-footer social-auth-links">
                 <button type="submit" class="btn btn-primary btn-flat btn-block"><i class="fa fa-sign-in"></i> Masuk</button>
-                <a href="#" class="btn btn-block btn-danger btn-flat"><i class="fa fa-google"></i> Masuk Menggunakan Goggle</a>
+                {{-- <a href="#" class="btn btn-block btn-danger btn-flat"><i class="fa fa-google"></i> Masuk Menggunakan Goggle</a> --}}
               </div>
               </form>
             </div>
@@ -149,7 +149,7 @@
   <footer class="main-footer">
     <div class="container">
       <div class="pull-right hidden-xs">
-        <b>Version</b> 1.0.0
+        <b>BAAPIK Version</b> 4.0.1
       </div>
       <strong>Copyright &copy; 2022 Pemerintah Kota Banjarmasin</strong>
     </div>
