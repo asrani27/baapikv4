@@ -25,7 +25,7 @@ class AnamnesaController extends Controller
             return view('admin.pelayanan.anamnesa.index', compact('data', 'statusPulang', 'id', 'riwayat', 'tm1', 'kesadaran'));
         } else {
             //edit
-            $data = $data->anamnesa;
+            $data = $data;
 
             return view('admin.pelayanan.anamnesa.edit', compact('data', 'statusPulang', 'id', 'riwayat', 'tm1', 'kesadaran'));
         }

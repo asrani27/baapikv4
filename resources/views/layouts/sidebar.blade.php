@@ -70,6 +70,7 @@
           <li class="{{ (request()->is('superadmin/setting/gantipassword')) ? 'active' : '' }}"><a href="/superadmin/setting/gantipassword"><i class="fa fa-circle-o"></i> Ganti Password</a></li>
         </ul>
     </li>
+    <li class="{{ (request()->is('superadmin/manualbook*')) ? 'active' : '' }}"><a href="/superadmin/manualbook"><i class="fa fa-book"></i> <span>Manual Book</span></a></li>
     </ul>
     <!-- /.sidebar-menu -->
 </section>

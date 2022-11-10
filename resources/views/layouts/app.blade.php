@@ -35,9 +35,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Logo -->
     <a href="#" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini">BAAPIK</span>
+      <span class="logo-mini">BAAPIK V.4</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>BAAPIK</b></span>
+      <span class="logo-lg"><b>BAAPIK V.4</b></span>
     </a>
 
     <!-- Header Navbar -->

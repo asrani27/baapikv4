@@ -11,7 +11,6 @@
         <div class="box-body">
             <div class="form-group">
             <label for="inputEmail3" class="col-sm-4 control-label">Status Pulang</label>
-
             <div class="col-sm-8">
                 <select name="kdStatusPulang" class="form-control" required>
                     <option value="">-Pilih-</option>

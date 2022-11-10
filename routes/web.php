@@ -22,6 +22,7 @@ use App\Http\Controllers\TindakanController;
 use App\Http\Controllers\KesadaranController;
 use App\Http\Controllers\PelayananController;
 use App\Http\Controllers\SpesialisController;
+use App\Http\Controllers\ManualBookController;
 use App\Http\Controllers\RekamMedisController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\TpermohonanController;
@@ -124,4 +125,10 @@ Route::group(['middleware' => ['auth', 'role:superadmin']], function () {
 
     Route::get('superadmin/rekam-medis', [RekamMedisController::class, 'index']);
     Route::get('superadmin/rekam-medis/cari', [RekamMedisController::class, 'cari']);
+
+    Route::get('superadmin/manualbook', [ManualBookController::class, 'index']);
+    Route::get('superadmin/manualbook/create', [ManualBookController::class, 'create']);
+    Route::post('superadmin/manualbook/create', [ManualBookController::class, 'store']);
+    Route::get('superadmin/manualbook/edit/{id}', [ManualBookController::class, 'edit']);
+    Route::post('superadmin/manualbook/edit/{id}', [ManualBookController::class, 'update']);
 });

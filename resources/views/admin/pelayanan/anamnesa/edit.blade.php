@@ -17,7 +17,7 @@
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal" method="POST" action="/superadmin/pelayanan/periksa/{{$id}}/anamnesa/{{$data->id}}/update">
+                <form class="form-horizontal" method="POST" action="/superadmin/pelayanan/periksa/{{$id}}/anamnesa/{{$data->anamnesa->id}}/update">
                     @csrf
                     <div class="box-body">
                         <div class="form-group">
@@ -26,7 +26,7 @@
                             <select class="form-control select2" name="kdDokter1" style="width: 100%;" required>
                                 <option value="">-tenaga medis 1-</option>
                                 @foreach ($tm1 as $item)
-                                    <option value="{{$item->kdDokter}}" {{$data->kdDokter1 == $item->kdDokter ? 'selected':''}}>{{$item->nmDokter}}</option>
+                                    <option value="{{$item->kdDokter}}" {{$data->anamnesa->kdDokter1 == $item->kdDokter ? 'selected':''}}>{{$item->nmDokter}}</option>
                                 @endforeach
                             </select>
                           </div>
@@ -46,7 +46,7 @@
                             <select class="form-control select2" name="kdSadar" style="width: 100%;">
                                 
                                 @foreach ($kesadaran as $item)
-                                    <option value="{{$item->kdSadar}}" {{$data->kdSadar == $item->kdSadar ? 'selected':''}}>{{$item->nmSadar}}</option>
+                                    <option value="{{$item->kdSadar}}" {{$data->anamnesa->kdSadar == $item->kdSadar ? 'selected':''}}>{{$item->nmSadar}}</option>
                                 @endforeach
                             </select>
                           </div>
@@ -54,81 +54,81 @@
                         <div class="form-group">
                           <label class="col-sm-2 control-label">Keluhan</label>
                           <div class="col-sm-10">
-                            <input type="text" name="keluhan" class="form-control" value="{{$data->keluhan}}">
+                            <input type="text" name="keluhan" class="form-control" value="{{$data->anamnesa->keluhan}}">
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="col-sm-2 control-label">Suhu</label>
                           <div class="col-sm-10">
-                            <input type="text" name="suhu" class="form-control" value="{{$data->suhu}}">
+                            <input type="text" name="suhu" class="form-control" value="{{$data->anamnesa->suhu}}">
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="col-sm-2 control-label">Tinggi Badan</label>
                           <div class="col-sm-10">
-                            <input type="text" name="tinggiBadan" id="tb" class="form-control" required value="{{$data->tinggiBadan}}"
+                            <input type="text" name="tinggiBadan" id="tb" class="form-control" required value="{{$data->anamnesa->tinggiBadan}}"
                             onKeyPress="edValueKeyPress()" onKeyUp="edValueKeyPress()">
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="col-sm-2 control-label">Berat Badan</label>
                           <div class="col-sm-10">
-                            <input type="text" name="beratBadan" id="bb" class="form-control" required value="{{$data->beratBadan}}"
+                            <input type="text" name="beratBadan" id="bb" class="form-control" required value="{{$data->anamnesa->beratBadan}}"
                             onKeyPress="edValueKeyPress()" onKeyUp="edValueKeyPress()">
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="col-sm-2 control-label">Lingkar Perut</label>
                           <div class="col-sm-10">
-                            <input type="text" name="lingkarPerut" class="form-control" value="{{$data->lingkarPerut}}">
+                            <input type="text" name="lingkarPerut" class="form-control" value="{{$data->anamnesa->lingkarPerut}}">
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="col-sm-2 control-label">IMT</label>
                           <div class="col-sm-10">
-                            <input type="text" name="imt" class="form-control" id="lblValue" readonly value="{{$data->imt}}">
+                            <input type="text" name="imt" class="form-control" id="lblValue" readonly value="{{$data->anamnesa->imt}}">
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="col-sm-2 control-label">Sistole</label>
                           <div class="col-sm-10">
-                            <input type="text" name="sistole" class="form-control" value="{{$data->sistole}}">
+                            <input type="text" name="sistole" class="form-control" value="{{$data->anamnesa->sistole}}">
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="col-sm-2 control-label">Diastole</label>
                           <div class="col-sm-10">
-                            <input type="text" name="diastole" class="form-control" value="{{$data->diastole}}">
+                            <input type="text" name="diastole" class="form-control" value="{{$data->anamnesa->diastole}}">
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="col-sm-2 control-label">Resprate</label>
                           <div class="col-sm-10">
-                            <input type="text" name="respRate" class="form-control" value="{{$data->respRate}}">
+                            <input type="text" name="respRate" class="form-control" value="{{$data->anamnesa->respRate}}">
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="col-sm-2 control-label">Heartrate</label>
                           <div class="col-sm-10">
-                            <input type="text" name="heartRate" class="form-control" value="{{$data->heartRate}}">
+                            <input type="text" name="heartRate" class="form-control" value="{{$data->anamnesa->heartRate}}">
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="col-sm-2 control-label">Terapi Obat</label>
                           <div class="col-sm-10">
-                            <input type="text" name="terapi" class="form-control" value="{{$data->terapi}}">
+                            <input type="text" name="terapi" class="form-control" value="{{$data->anamnesa->terapi}}">
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="col-sm-2 control-label">Terapi Non Obat</label>
                           <div class="col-sm-10">
-                            <input type="text" name="terapinonobat" class="form-control" value="{{$data->terapinonobat}}">
+                            <input type="text" name="terapinonobat" class="form-control" value="{{$data->anamnesa->terapinonobat}}">
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="col-sm-2 control-label">Keterangan</label>
                           <div class="col-sm-10">
-                            <input type="text" name="keterangan" class="form-control" value="{{$data->keterangan}}">
+                            <input type="text" name="keterangan" class="form-control" value="{{$data->anamnesa->keterangan}}">
                           </div>
                         </div>
                         <div class="form-group">
