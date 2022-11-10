@@ -29,6 +29,7 @@ class PelayananController extends Controller
     public function periksa($id)
     {
         $data = T_pelayanan::find($id);
+
         $statusPulang = M_status_pulang::get();
         $riwayat = $data->pasien->riwayat;
         $riwayat->map(function ($item) {
