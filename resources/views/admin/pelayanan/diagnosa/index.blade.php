@@ -116,7 +116,7 @@
             console.log(response);
               var data_array = [];
                       response.forEach(function(value,key){
-                  data_array.push({id:value.id,text:value.kdDiag+' - '+value.nmDiag})
+                  data_array.push({id:value.kdDiag,text:value.kdDiag+' - '+value.nmDiag})
               });
               return {
                   results: data_array
