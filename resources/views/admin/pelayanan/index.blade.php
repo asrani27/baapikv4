@@ -62,7 +62,7 @@
           <th>Usia</th>
           <th>Jenis</th>
           <th>Ruang</th>
-          <th>Status</th>
+          <th>Status Pulang</th>
           <th>Briding?</th>
           <th>Aksi</th>
         </tr>
