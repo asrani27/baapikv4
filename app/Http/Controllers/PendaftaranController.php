@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\M_poli;
+use App\Models\M_status_pulang;
 use Illuminate\Http\Request;
 use App\Models\T_pendaftaran;
 use Illuminate\Support\Facades\Session;
@@ -13,6 +14,7 @@ class PendaftaranController extends Controller
     public function index()
     {
         $data = T_pendaftaran::orderBy('id', 'DESC')->paginate(15);
+        //dd($data);
         $poli = M_poli::get();
         return view('admin.pendaftaran.index', compact('data', 'poli'));
     }

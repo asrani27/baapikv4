@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\M_pasien;
+use App\Models\T_anamnesa;
 use App\Models\T_pelayanan;
 use Illuminate\Console\Command;
 
@@ -39,6 +40,7 @@ class perbaikandata extends Command
      */
     public function handle()
     {
+        //perbaikan data nik ke pendaftaran
         $pasien = M_pasien::get();
         foreach ($pasien as $i) {
             if ($i->nik == null) {
@@ -48,6 +50,15 @@ class perbaikandata extends Command
                     $p->update(['m_pasien_id' => $i->id]);
                 }
             }
+        }
+
+        //perbaikan data status pulang dari tabel anamnesa ke tabel pendaftaran
+        $anamnesa = T_anamnesa::get();
+        foreach ($anamnesa as $a) {
+            $pendaftaran = $a->pendaftaran;
+            $pendaftaran->update([
+                'kdStatusPulang' => $a->statusPulang == null ? null : $a->statusPulang->kdStatusPulang
+            ]);
         }
     }
 }

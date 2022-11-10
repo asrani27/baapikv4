@@ -19,4 +19,13 @@ class T_anamnesa extends Model
     {
         return $this->belongsTo(M_kesadaran::class, 'm_kesadaran_id');
     }
+
+    public function statusPulang()
+    {
+        return $this->belongsTo(M_status_pulang::class, 'm_status_pulang_id');
+    }
+    public function pendaftaran()
+    {
+        return $this->belongsTo(T_pendaftaran::class, 't_pendaftaran_id');
+    }
 }

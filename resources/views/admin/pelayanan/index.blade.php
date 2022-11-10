@@ -82,7 +82,7 @@
             <td>{{hitungUmur($item->tglLahir)}}</td>
             <td>{{$item->jenis}}</td>
             <td>{{$item->nmPoli}}</td>
-            <td>{{$item->status}}</td>
+            <td>{{$item->status_pulang == null ? '': $item->status_pulang->nmStatusPulang}}</td>
             <td>
                 @if ($item->jenis != 'UMUM')
                 @if ($item->noUrut != null)
