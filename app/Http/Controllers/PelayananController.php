@@ -22,7 +22,10 @@ class PelayananController extends Controller
 
     public function updateStatusPulang(Request $req, $id)
     {
-        T_pelayanan::find($id)->update(['kdStatusPulang' => $req->kdStatusPulang]);
+        T_pelayanan::find($id)->update([
+            'kdStatusPulang' => $req->kdStatusPulang,
+            'status' => 'Sudah dilayani'
+        ]);
         Session::flash('success', 'Status Pulang di update');
         return back();
     }

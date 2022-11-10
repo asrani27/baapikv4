@@ -33,7 +33,10 @@ class PendaftaranController extends Controller
 
     public function kepoli($id)
     {
-        T_pendaftaran::find($id)->update(['ke_poli' => 1]);
+        T_pendaftaran::find($id)->update([
+            'ke_poli' => 1,
+            'status' => 'Baru',
+        ]);
         Session::flash('success', 'Berhasil Di kirim ke poli');
         return back();
     }
