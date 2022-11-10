@@ -4,6 +4,7 @@ use App\Models\Barang;
 use App\Models\Satuan;
 use GuzzleHttp\Client;
 use App\Models\BarangToko;
+use App\Models\T_pelayanan;
 use Illuminate\Support\Facades\Auth;
 
 function hitungUmur($umur)
@@ -641,5 +642,10 @@ function WSGetKunjungan($type = 'GET', $param1 = null)
         ]);
         $data = json_decode((string)$response->getBody())->response;
         return $data;
+    }
+
+    function pelayananBaru()
+    {
+        return = T_pelayanan::where('kdStatusPulang', null)->count();
     }
 }

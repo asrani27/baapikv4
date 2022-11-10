@@ -57,7 +57,7 @@ class perbaikandata extends Command
         foreach ($anamnesa as $a) {
             $pendaftaran = $a->pendaftaran;
             $pendaftaran->update([
-                'kdStatusPulang' => $a->statusPulang == null ? null : $a->statusPulang->kdStatusPulang
+                'kdStatusPulang' => $a->statusPulang == null ? $pendaftaran->kdStatusPulang : $a->statusPulang->kdStatusPulang
             ]);
         }
     }

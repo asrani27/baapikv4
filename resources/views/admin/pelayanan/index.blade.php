@@ -48,7 +48,7 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body table-responsive">
-      <table class="table table-condensed table-bordered">
+      <table class="table table-condensed ">
         <tr class="bg-primary" style="font-size: 10px;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">
           <th style="width: 10px">#</th>
           <th>No Antrian</th>
@@ -68,8 +68,13 @@
         </tr>
 
         @foreach ($data as $key => $item)
-            
-        <tr style="font-size: 12px">
+            @if ($item->kdStatusPulang == null)
+                
+        <tr style="font-size: 12px; background-color:#f9e6ea">
+            @else
+
+        <tr style="font-size: 12px; background-color:#e7faf1">
+            @endif
             <td style="widtd: 10px">{{$data->firstItem() + $key}}</td>
             <td>{{$item->nomor_antrian}}</td>
             <td>{{$item->tglDaftar}}</td>
