@@ -153,28 +153,24 @@
             <!-- /.box-header -->
             <div class="box-body">
               <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-12">
                   <div class="chart-responsive">
                     <canvas id="pieChart" height="320" width="1020" style="width: 510px; height: 160px;"></canvas>
                   </div>
                   <!-- ./chart-responsive -->
                 </div>
-                <!-- /.col -->
-                <div class="col-md-4">
-                  <ul class="chart-legend clearfix">
-                    <li><i class="fa fa-circle-o text-red"></i> Cholera</li>
-                    <li><i class="fa fa-circle-o text-green"></i> Flu</li>
-                    <li><i class="fa fa-circle-o text-yellow"></i> Demam</li>
-                    <li><i class="fa fa-circle-o text-aqua"></i> Panas Dalam</li>
-                    <li><i class="fa fa-circle-o text-light-blue"></i> Katarak</li>
-                    <li><i class="fa fa-circle-o text-gray"></i> Diabetes</li>
-                  </ul>
-                </div>
-                <!-- /.col -->
               </div>
               <!-- /.row -->
             </div>
             <!-- /.box-body -->
+            <div class="box-footer no-padding">
+              <ul class="nav nav-pills nav-stacked">
+                @foreach ($top10 as $item)
+                <li><a href="#"> {{Str::limit($item->label, 75, '....')}}
+                  <span class="pull-right text-red">{{$item->value}}</span></a></li>
+                @endforeach
+              </ul>
+            </div>
           </div>
     </div>
 </div>
@@ -184,14 +180,14 @@
     
 <script src="/assets/bower_components/chart.js/Chart.js"></script>
 <script>
+  
     $(function () {
       /* ChartJS
        * -------
        * Here we will create a few charts using ChartJS
        */
-      
       var areaChartData = {
-        labels  : ['Poli Umum', 'Poli KIA', 'Poli Lansia', 'Poli Gigi & Mulut', 'Laboratorium','Home-Visit','Konseling'],
+        labels  : {!! $nmPoli !!},
         datasets: [
           {
             label               : 'Pasien',
@@ -201,7 +197,7 @@
             pointStrokeColor    : 'rgba(60,141,188,1)',
             pointHighlightFill  : '#fff',
             pointHighlightStroke: 'rgba(60,141,188,1)',
-            data                : [28, 48, 40, 19, 4, 7, 9]
+            data                : {!! $jmlPasien !!}
           },
         ]
       }
@@ -249,44 +245,7 @@
     // Get context with jQuery - using jQuery's .get() method.
     var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
     var pieChart       = new Chart(pieChartCanvas)
-    var PieData        = [
-      {
-        value    : 700,
-        color    : '#f56954',
-        highlight: '#f56954',
-        label    : 'Cholera'
-      },
-      {
-        value    : 500,
-        color    : '#00a65a',
-        highlight: '#00a65a',
-        label    : 'Flu'
-      },
-      {
-        value    : 400,
-        color    : '#f39c12',
-        highlight: '#f39c12',
-        label    : 'Demam'
-      },
-      {
-        value    : 600,
-        color    : '#00c0ef',
-        highlight: '#00c0ef',
-        label    : 'Panas Dalam'
-      },
-      {
-        value    : 300,
-        color    : '#3c8dbc',
-        highlight: '#3c8dbc',
-        label    : 'Katarak'
-      },
-      {
-        value    : 100,
-        color    : '#d2d6de',
-        highlight: '#d2d6de',
-        label    : 'Diabetes'
-      }
-    ]
+    var PieData        = {!! $top10 !!}
     var pieOptions     = {
       //Boolean - Whether we should show a stroke on each segment
       segmentShowStroke    : true,
