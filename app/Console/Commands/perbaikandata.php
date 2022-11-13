@@ -77,12 +77,26 @@ class perbaikandata extends Command
             }
         }
 
-        foreach ($pasien as $i) {
-            if ($i->nik == null) {
-            } else {
-                $pelayanan = T_pelayanan::where('nik', $i->nik)->get();
-                foreach ($pelayanan as $p) {
-                    $p->update(['m_pasien_id' => $i->id]);
+        //perbaikan data pasien pendaftaran tidak terdaftar di tabel pasien berdasarkan NIK
+        $pasienPelayanan = T_pelayanan::where('nik', '!=', null)->get();
+        foreach ($pasienPelayanan as $p) {
+            if ($p->m_pasien_id == null) {
+                $check = M_pasien::where('nik', $p->nik)->first();
+                if ($check != null) {
+                    $p->update([
+                        'm_pasien_id' => $check->id,
+                    ]);
+                } else {
+                    //create
+                    $n = new M_pasien;
+                    $n->nik = $p->nik;
+                    $n->noKartu = $p->noKartu;
+                    $n->nama = $p->nama;
+                    $n->sex = $p->sex;
+                    $n->tglLahir = $p->tglLahir;
+                    $n->save();
+
+                    $p->update(['m_pasien_id' => $n->id]);
                 }
             }
         }
