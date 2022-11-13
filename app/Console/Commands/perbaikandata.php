@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\M_dokter;
 use App\Models\M_pasien;
 use App\Models\T_anamnesa;
 use App\Models\T_pelayanan;
