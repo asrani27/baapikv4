@@ -53,6 +53,27 @@ class perbaikandata extends Command
             }
         }
 
+        //perbaikan data pasien pendaftaran tidak terdaftar di tabel pasien berdasarkan no Kartu
+        $pasienPelayanan = T_pelayanan::where('noKartu', '!=', null)->get();
+        foreach ($pasienPelayanan as $p) {
+            $check = M_pasien::where('noKartu', $p->noKartu)->first();
+            if ($check != null) {
+                $p->update([
+                    'm_pasien_id' => $check->id,
+                ]);
+            }
+        }
+
+        foreach ($pasien as $i) {
+            if ($i->nik == null) {
+            } else {
+                $pelayanan = T_pelayanan::where('nik', $i->nik)->get();
+                foreach ($pelayanan as $p) {
+                    $p->update(['m_pasien_id' => $i->id]);
+                }
+            }
+        }
+
         //perbaikan data status pulang dari tabel anamnesa ke tabel pendaftaran
         $anamnesa = T_anamnesa::get();
         foreach ($anamnesa as $a) {

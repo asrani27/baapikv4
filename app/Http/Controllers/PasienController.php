@@ -63,6 +63,11 @@ class PasienController extends Controller
                     return view('admin.pasien.add', compact('data'));
                 }
             } catch (\Exception $e) {
+                if ($e->getResponse()->getStatusCode() == 400) {
+                    Session::flash('error', 'Gagal Bridging, Silahkan Check Akun Bridging');
+                    return back();
+                }
+
                 if (Auth::user()->mode == 1) {
                     $message = json_decode((string)$e->getResponse()->getBody())->response[0]->message;
                 } else {
