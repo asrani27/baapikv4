@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PoliController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ResepController;
 use App\Http\Controllers\DaftarController;
@@ -122,6 +123,8 @@ Route::group(['middleware' => ['auth', 'role:superadmin']], function () {
     Route::get('superadmin/manajemen-obat/obat', [ObatController::class, 'index']);
     Route::get('superadmin/manajemen-obat/masuk', [ObatController::class, 'index']);
     Route::get('superadmin/manajemen-obat/keluar', [ObatController::class, 'index']);
+
+    Route::get('superadmin/manajemen-user', [UserController::class, 'index']);
 
     Route::get('superadmin/rekam-medis', [RekamMedisController::class, 'index']);
     Route::get('superadmin/rekam-medis/cari', [RekamMedisController::class, 'cari']);
