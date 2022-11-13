@@ -56,12 +56,23 @@ class perbaikandata extends Command
         //perbaikan data pasien pendaftaran tidak terdaftar di tabel pasien berdasarkan no Kartu
         $pasienPelayanan = T_pelayanan::where('noKartu', '!=', null)->get();
         foreach ($pasienPelayanan as $p) {
-            if($p->m_pasien_id == null){
+            if ($p->m_pasien_id == null) {
                 $check = M_pasien::where('noKartu', $p->noKartu)->first();
                 if ($check != null) {
                     $p->update([
                         'm_pasien_id' => $check->id,
                     ]);
+                } else {
+                    //create
+                    $n = new M_pasien;
+                    $n->nik = $p->nik;
+                    $n->noKartu = $p->noKartu;
+                    $n->nama = $p->nama;
+                    $n->sex = $p->sex;
+                    $n->tglLahir = $p->tglLahir;
+                    $n->save();
+
+                    $p->update(['m_pasien_id' => $n->id]);
                 }
             }
         }
