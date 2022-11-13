@@ -124,7 +124,7 @@ Route::group(['middleware' => ['auth', 'role:superadmin']], function () {
     Route::get('superadmin/manajemen-obat/masuk', [ObatController::class, 'index']);
     Route::get('superadmin/manajemen-obat/keluar', [ObatController::class, 'index']);
 
-    Route::get('superadmin/manajemen-user', [UserController::class, 'index']);
+    Route::get('superadmin/setting/manajemen-user', [UserController::class, 'index']);
 
     Route::get('superadmin/rekam-medis', [RekamMedisController::class, 'index']);
     Route::get('superadmin/rekam-medis/cari', [RekamMedisController::class, 'cari']);
