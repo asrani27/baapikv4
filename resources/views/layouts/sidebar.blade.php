@@ -17,7 +17,7 @@
     </span>
     </a></li>
     <li class="{{ (request()->is('superadmin/rekam-medis*')) ? 'active' : '' }}"><a href="/superadmin/rekam-medis"><i class="fa fa-search-plus"></i> <span>Rekam Medis</span></a></li>
-    <li class="{{ (request()->is('superadmin/manajemen-obat*')) ? 'active' : '' }} treeview">
+    {{-- <li class="{{ (request()->is('superadmin/manajemen-obat*')) ? 'active' : '' }} treeview">
       <a href="#">
         <i class="fa fa-medkit"></i> <span>Manajemen Obat</span>
         <span class="pull-right-container">
@@ -29,7 +29,7 @@
         <li class="{{ (request()->is('superadmin/manajemen-obat/masuk')) ? 'active' : '' }}"><a href="/superadmin/manajemen-obat/masuk"><i class="fa fa-circle-o"></i> Obat Masuk</a></li>
         <li class="{{ (request()->is('superadmin/manajemen-obat/keluar')) ? 'active' : '' }}"><a href="/superadmin/manajemen-obat/keluar"><i class="fa fa-circle-o"></i> Obat Keluar</a></li>
       </ul>
-  </li>
+    </li>
     <li class="{{ (request()->is('superadmin/laporan*')) ? 'active' : '' }} treeview">
         <a href="#">
           <i class="fa fa-clipboard"></i> <span>Laporan</span>
@@ -43,7 +43,7 @@
           <li class="{{ (request()->is('superadmin/laporan/lb3')) ? 'active' : '' }}"><a href="/superadmin/laporan/lb3"><i class="fa fa-circle-o"></i> LB 3</a></li>
           <li class="{{ (request()->is('superadmin/laporan/lb4')) ? 'active' : '' }}"><a href="/superadmin/laporan/lb4"><i class="fa fa-circle-o"></i> LB 4</a></li>
         </ul>
-    </li>
+    </li> --}}
 
     <li class="{{ (request()->is('superadmin/data*')) ? 'active' : '' }} treeview">
         <a href="#">
