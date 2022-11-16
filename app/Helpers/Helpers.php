@@ -167,6 +167,8 @@ function headerDevelopment()
     $head['X-Signature'] = $encodedSignature;
     $head['X-Authorization'] = 'Basic ' . $Authorization;
     $head['user_key'] = $user_key;
+    //$head['user_pcare'] = $username_pcare;
+    //$head['pass_pcare'] = $password_pcare;
 
     return $head;
 }
@@ -238,6 +240,7 @@ function WSDiagnosa($type = 'GET', $kode = '0', $row = 0, $limit = 10000)
         $response = $client->request($type, 'diagnosa/' . $kode . '/' . $row . '/' . $limit, [
             'headers' => headerDevelopment(),
         ]);
+
         $string = json_decode((string)$response->getBody())->response;
 
         return decryptString($string);

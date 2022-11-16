@@ -37,6 +37,9 @@
                             <select class="form-control select2" name="kdDokter2" style="width: 100%;">
                                 
                                 <option value="">-tenaga medis 2-</option>
+                                @foreach ($tm1 as $item)
+                                    <option value="{{$item->kdDokter}}">{{$item->nmDokter}}</option>
+                                @endforeach
                             </select>
                           </div>
                         </div>

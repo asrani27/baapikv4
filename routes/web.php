@@ -60,6 +60,9 @@ Route::group(['middleware' => ['auth', 'role:superadmin']], function () {
     Route::get('superadmin/data/poli', [PoliController::class, 'index']);
     Route::get('superadmin/data/poli/get', [PoliController::class, 'getPoli']);
     Route::get('superadmin/data/dokter', [DokterController::class, 'index']);
+    Route::get('superadmin/data/dokter/{id}/delete', [DokterController::class, 'delete']);
+    Route::post('superadmin/data/dokter/create', [DokterController::class, 'store']);
+    Route::post('superadmin/data/dokter/update', [DokterController::class, 'update']);
     Route::get('superadmin/data/dokter/get', [DokterController::class, 'getDokter']);
     Route::get('superadmin/data/kesadaran', [KesadaranController::class, 'index']);
     Route::get('superadmin/data/kesadaran/get', [KesadaranController::class, 'getKesadaran']);
