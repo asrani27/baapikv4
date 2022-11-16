@@ -41,7 +41,7 @@ class DokterController extends Controller
 
     public function delete($id)
     {
-        M_dokter::find($id)->delete()
+        M_dokter::find($id)->delete();
         Session::flash('success', 'Berhasil Di Hapus');
         return back();
     }

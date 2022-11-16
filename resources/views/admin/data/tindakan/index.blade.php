@@ -30,6 +30,7 @@
                     <th>Kode Tindakan</th>
                     <th>Nama Tindakan</th>
                     <th>Tarif</th>
+                    <th></th>
                 </tr>
         
                 @foreach ($data as $key => $item)
@@ -39,6 +40,13 @@
                     <td>{{$item->kdTindakan}}</td>
                     <td>{{$item->nmTindakan}}</td>
                     <td>{{$item->maxTarif}}</td>
+
+                    <td>
+                        <a href="#" class="btn btn-primary btn-xs btn-flat edit-tindakan" data-id="{{$item->id}}"
+                        data-kdTindakan="{{$item->kdTindakan}}" data-nmTindakan="{{$item->nmTindakan}}" data-maxTarif="{{$item->maxTarif}}"><i class="fa fa-edit"></i>  Edit</a>
+                        <a href="/superadmin/data/tindakan/{{$item->id}}/delete" class="btn btn-danger btn-xs btn-flat" onclick="return confirm('Yakin ingin di hapus');"> <i class="fa fa-trash"></i>  Delete</a>
+                        
+                    </td>
                 </tr>    
                 @endforeach
                 </table>
@@ -56,7 +64,7 @@
             <span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title"><i class="ion ion-clipboard"></i> Tambah Tenaga Medis</h4>
         </div>
-        <form method="post" action="/superadmin/data/dokter/create">
+        <form method="post" action="/superadmin/data/tindakan/create">
         <div class="modal-body">
             @csrf
             <div class="form-group">
@@ -95,7 +103,7 @@
             @csrf
             <div class="form-group">
                 <label>Kode Tindakan</label>
-                <input type="text" id="kdTindakan" class="form-control" name="kdDokter" placeholder="Kode Tindakan">
+                <input type="text" id="kdTindakan" class="form-control" name="kdTindakan" placeholder="Kode Tindakan">
             </div>
             <div class="form-group">
                 <label>Nama Tindakan</label>

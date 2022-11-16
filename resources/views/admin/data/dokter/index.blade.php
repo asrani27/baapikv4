@@ -43,7 +43,7 @@
                     <td>
                     <a href="#" class="btn btn-primary btn-xs btn-flat edit-dokter" data-id="{{$item->id}}"
                     data-kdDokter="{{$item->kdDokter}}" data-nmDokter="{{$item->nmDokter}}"><i class="fa fa-edit"></i>  Edit</a>
-                    <a href="/superadmin/data/dokter/{{$item->id}}/delete" class="btn btn-danger btn-xs btn-flat edit-dokter" onclick="return confirm('Yakin ingin di hapus');"> <i class="fa fa-trash"></i>  Delete</a>
+                    <a href="/superadmin/data/dokter/{{$item->id}}/delete" class="btn btn-danger btn-xs btn-flat" onclick="return confirm('Yakin ingin di hapus');"> <i class="fa fa-trash"></i>  Delete</a>
                     </td>
                 </tr>    
                 @endforeach

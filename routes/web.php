@@ -73,6 +73,9 @@ Route::group(['middleware' => ['auth', 'role:superadmin']], function () {
     Route::get('superadmin/data/sarana', [SaranaController::class, 'index']);
     Route::get('superadmin/data/khusus', [KhususController::class, 'index']);
     Route::get('superadmin/data/tindakan', [TindakanController::class, 'index']);
+    Route::get('superadmin/data/tindakan/{id}/delete', [TindakanController::class, 'delete']);
+    Route::post('superadmin/data/tindakan/create', [TindakanController::class, 'store']);
+    Route::post('superadmin/data/tindakan/update', [TindakanController::class, 'update']);
 
     Route::get('superadmin/setting/akun-bridging', [SettingController::class, 'akunbridging']);
     Route::post('superadmin/setting/akun-bridging/development', [SettingController::class, 'development']);

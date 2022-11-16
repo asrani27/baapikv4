@@ -22,10 +22,41 @@ class TindakanController extends Controller
 
     public function index()
     {
-        $data = M_tindakan::paginate(15);
+        $data = M_tindakan::orderBy('id', 'DESC')->paginate(15);
         $dataPcare = null;
 
         return view('admin.data.tindakan.index', compact('data', 'dataPcare'));
+    }
+    public function store(Request $req)
+    {
+        $checkKode = M_tindakan::where('kdTindakan', $req->kdTindakan)->first();
+        if ($checkKode == null) {
+            M_tindakan::create($req->all());
+            Session::flash('success', 'Berhasil Di Simpan');
+            return back();
+        } else {
+            Session::flash('error', 'Kode Dokter Sudah Ada');
+            return back();
+        }
+    }
+
+
+    public function update(Request $req)
+    {
+        M_tindakan::find($req->tindakan_id)->update([
+            'kdTindakan' => $req->kdTindakan,
+            'nmTindakan' => $req->nmTindakan,
+            'maxTarif' => $req->maxTarif,
+        ]);
+        Session::flash('success', 'Berhasil Di Update');
+        return back();
+    }
+
+    public function delete($id)
+    {
+        M_tindakan::find($id)->delete();
+        Session::flash('success', 'Berhasil Di Hapus');
+        return back();
     }
 
     public function storeD(Request $req, $id)
@@ -33,7 +64,7 @@ class TindakanController extends Controller
         $attr = $req->all();
         $attr['t_pendaftaran_id'] = $id;
         $attr['m_tindakan_id'] = M_tindakan::where('kdTindakan', $req->kdTindakan)->first()->id;
-        
+
         T_tindakan::create($attr);
         Session::flash('success', 'Data Di Simpan');
         return back();
