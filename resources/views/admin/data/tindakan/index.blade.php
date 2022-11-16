@@ -62,7 +62,7 @@
         <div class="modal-header bg-primary">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title"><i class="ion ion-clipboard"></i> Tambah Tenaga Medis</h4>
+          <h4 class="modal-title"><i class="ion ion-clipboard"></i> Tambah Tindakan</h4>
         </div>
         <form method="post" action="/superadmin/data/tindakan/create">
         <div class="modal-body">
