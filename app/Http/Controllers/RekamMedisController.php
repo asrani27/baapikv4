@@ -23,11 +23,11 @@ class RekamMedisController extends Controller
 
         $keyword = request()->cari;
         $data = M_pasien::where('noRM', $keyword)->orWhere('nik', $keyword)->first();
+        request()->flash();
         if ($data == null) {
             Session::flash('info', 'Data Tidak Ditemukan');
             return back();
         } else {
-
             return view('admin.rekammedis.index', compact('data'));
         }
     }
