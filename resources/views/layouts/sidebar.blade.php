@@ -9,11 +9,11 @@
     <li class="{{ (request()->is('superadmin/pendaftaran*')) ? 'active' : '' }}"><a href="/superadmin/pendaftaran"><i class="fa fa-user-plus"></i> <span>Pendaftaran</span></a></li>
     <li class="{{ (request()->is('superadmin/pelayanan*')) ? 'active' : '' }}"><a href="/superadmin/pelayanan"><i class="fa fa-stethoscope"></i> <span>Pelayanan</span>
       <span class="pull-right-container">
-        @if (pelayananBaru() == 0)
+        {{-- @if (pelayananBaru() == 0)
             
         @else
         <small class="label pull-right bg-red">{{pelayananBaru()}}</small>
-        @endif
+        @endif --}}
     </span>
     </a></li>
     <li class="{{ (request()->is('superadmin/rekam-medis*')) ? 'active' : '' }}"><a href="/superadmin/rekam-medis"><i class="fa fa-search-plus"></i> <span>Rekam Medis</span></a></li>

@@ -701,8 +701,8 @@ function WSGetKunjungan($type = 'GET', $param1 = null)
     }
 }
 
-function pelayananBaru()
-{
+// function pelayananBaru()
+// {
 
-    return T_pelayanan::where('ke_poli', 1)->where('kdStatusPulang', null)->count();
-}
+//     return T_pelayanan::where('ke_poli', 1)->where('kdStatusPulang', null)->count();
+// }
