@@ -47,8 +47,8 @@
             <label for="inputEmail3" class="col-sm-2 control-label">Jenis Kelamin <span class="text-red">*</span></label>
             <div class="col-sm-10">
               <select name="sex" class="form-control">
-                <option value="L" {{$data == null ? '': $data->sex == 'L' ? 'selected':''}}>Laki-Laki</option>
-                <option value="P" {{$data == null ? '': $data->sex == 'P' ? 'selected':''}}>Perempuan</option>
+                <option value="L" {{($data == null ? '': $data->sex) == 'L' ? 'selected':''}}>Laki-Laki</option>
+                <option value="P" {{($data == null ? '': $data->sex) == 'P' ? 'selected':''}}>Perempuan</option>
               </select>
             </div>
         </div>

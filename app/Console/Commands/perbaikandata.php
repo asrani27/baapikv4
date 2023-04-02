@@ -116,7 +116,8 @@ class perbaikandata extends Command
         $pendaftaran = T_pendaftaran::get();
         foreach ($pendaftaran as $item) {
             $item->update([
-                'tanggal' => Carbon::parse($item->tglDaftar)->format('Y-m-d')
+                'tanggal_daftar' => Carbon::parse($item->tglDaftar)->format('Y-m-d'),
+                'tanggal_lahir' => Carbon::parse($item->tglLahir)->format('Y-m-d')
             ]);
         }
     }
