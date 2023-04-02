@@ -17,7 +17,7 @@
                 <i class="fa fa-database"></i>
                     <h3 class="box-title">Spesialis</h3>
                     <div class="box-tools">
-                        <a href="#" class='btn btn-sm btn-primary'>
+                        <a href="/superadmin/data/spesialis/get" class='btn btn-sm btn-primary'>
                             <i class="fa fa-repeat"></i> Get Spesialis</a>
                     </div>
             </div>
@@ -38,10 +38,10 @@
                     <td>{{$item->kdSpesialis}}</td>
                     <td>{{$item->nmSpesialis}}</td>
                     <td>
-                        @foreach ($item->sub as $item)
-                            <li>{{$item->nmSubSpesialis}}</li>
+                        @foreach ($item->sub as $item2)
+                            <li>{{$item2->nmSubSpesialis}}</li>
                         @endforeach
-                        <a href="#" class='btn btn-xs btn-primary'>
+                        <a href="/superadmin/data/spesialis/sub/get/{{$item->id}}/{{$item->kdSpesialis}}" class='btn btn-xs btn-primary'>
                             <i class="fa fa-repeat"></i> Get Sub Spesialis</a>
                     </td>
                 </tr>    
@@ -53,12 +53,6 @@
     </div>
 </div>
 </section>
-@if ($dataPcare != null)
-    @foreach ($dataPcare->list as $item)
-        <li>{{$item->kdSpesialis}}-{{$item->nmSpesialis}}</li>
-    @endforeach
-@endif
-
 @endsection
 @push('js')
     

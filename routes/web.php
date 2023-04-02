@@ -8,7 +8,6 @@ use App\Http\Controllers\PoliController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ResepController;
-use App\Http\Controllers\DaftarController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\KhususController;
 use App\Http\Controllers\LogoutController;
@@ -25,13 +24,11 @@ use App\Http\Controllers\PelayananController;
 use App\Http\Controllers\SpesialisController;
 use App\Http\Controllers\ManualBookController;
 use App\Http\Controllers\RekamMedisController;
+use App\Http\Controllers\LogBridgingController;
 use App\Http\Controllers\PendaftaranController;
-use App\Http\Controllers\TpermohonanController;
 use App\Http\Controllers\LaboratoriumController;
-use App\Http\Controllers\LupaPasswordController;
 use App\Http\Controllers\StatusPulangController;
-use App\Http\Controllers\DaftarLayananController;
-
+use App\Http\Controllers\SubSpesialisController;
 
 Route::get('/', function () {
     if (Auth::check()) {
@@ -50,10 +47,14 @@ Route::get('/logout', [LogoutController::class, 'logout']);
 
 Route::group(['middleware' => ['auth', 'role:superadmin']], function () {
     Route::get('superadmin', [HomeController::class, 'superadmin']);
+    Route::get('superadmin/logbridging', [LogBridgingController::class, 'index']);
+
     Route::get('superadmin/data/status-pulang', [StatusPulangController::class, 'index']);
-    Route::get('superadmin/data/status-pulang/get', [StatusPulangController::class, 'getStatusPulang']);
+    Route::get('superadmin/data/status-pulang/get/true', [StatusPulangController::class, 'getStatusPulangTrue']);
+    Route::get('superadmin/data/status-pulang/get/false', [StatusPulangController::class, 'getStatusPulangFalse']);
 
     Route::get('superadmin/data/diagnosa', [DiagnosaController::class, 'index']);
+    Route::post('superadmin/data/diagnosa', [DiagnosaController::class, 'store']);
     Route::get('superadmin/data/diagnosa/get', [DiagnosaController::class, 'getDiagnosa']);
     Route::get('superadmin/data/diagnosa/cari', [DiagnosaController::class, 'cari']);
 
@@ -70,8 +71,15 @@ Route::group(['middleware' => ['auth', 'role:superadmin']], function () {
     Route::get('superadmin/data/provider/get', [ProviderController::class, 'getProvider']);
 
     Route::get('superadmin/data/spesialis', [SpesialisController::class, 'index']);
+    Route::get('superadmin/data/spesialis/get', [SpesialisController::class, 'getSpesialis']);
+    Route::get('superadmin/data/spesialis/sub/get/{id}/{kdSpesialis}', [SubSpesialisController::class, 'getSubSpesialis']);
+
     Route::get('superadmin/data/sarana', [SaranaController::class, 'index']);
+    Route::get('superadmin/data/sarana/get', [SaranaController::class, 'getSarana']);
+
     Route::get('superadmin/data/khusus', [KhususController::class, 'index']);
+    Route::get('superadmin/data/khusus/get', [KhususController::class, 'getKhusus']);
+
     Route::get('superadmin/data/tindakan', [TindakanController::class, 'index']);
     Route::get('superadmin/data/tindakan/{id}/delete', [TindakanController::class, 'delete']);
     Route::post('superadmin/data/tindakan/create', [TindakanController::class, 'store']);

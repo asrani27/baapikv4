@@ -21,7 +21,7 @@
                     <div class="box-tools">
                         <button type="button" class="btn btn-primary btn-sm btn-flat" data-toggle="modal" data-target="#modal-add" data-backdrop="static" data-keyboard="false"><i class="fa fa-plus"></i>  Tambah Dokter</button>
                         <a href="/superadmin/data/dokter/get" class='btn btn-sm btn-primary'>
-                            <i class="fa fa-repeat"></i> Get Dokter</a>
+                            <i class="fa fa-repeat"></i> Get Dokter Pcare</a>
                     </div>
             </div>
 
@@ -31,6 +31,7 @@
                     <th style="width: 10px">#</th>
                     <th>Kode Dokter</th>
                     <th>Nama Dokter</th>
+                    <th>Sumber</th>
                     <th></th>
                 </tr>
         
@@ -40,6 +41,7 @@
                     <td style="widtd: 10px">{{$data->firstItem() + $key}}</td>
                     <td>{{$item->kdDokter}}</td>
                     <td>{{$item->nmDokter}}</td>
+                    <td>{{$item->is_bridging == 1 ? 'Pcare' : 'local' }}</td>
                     <td>
                     <a href="#" class="btn btn-primary btn-xs btn-flat edit-dokter" data-id="{{$item->id}}"
                     data-kdDokter="{{$item->kdDokter}}" data-nmDokter="{{$item->nmDokter}}"><i class="fa fa-edit"></i>  Edit</a>
@@ -116,11 +118,11 @@
     <!-- /.modal-dialog -->
   </div>
 </section>
-@if ($dataPcare != null)
+{{-- @if ($dataPcare != null)
     @foreach ($dataPcare->list as $item)
         <li>{{$item->kdDokter}}-{{$item->nmDokter}}</li>
     @endforeach
-@endif
+@endif --}}
 
 @endsection
 @push('js')

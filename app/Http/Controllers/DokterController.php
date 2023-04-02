@@ -55,13 +55,30 @@ class DokterController extends Controller
                 return back();
             } else {
                 $dataPcare = $service;
+                foreach ($dataPcare->list as $i) {
+                    //check DB lokal
+                    $check = M_dokter::where('kdDokter', $i->kdDokter)->first();
+                    if ($check == null) {
+                        $n = new M_dokter;
+                        $n->kdDokter = $i->kdDokter;
+                        $n->nmDokter = $i->nmDokter;
+                        $n->is_bridging = 1;
+                        $n->save();
+                    } else {
+                        $check->update([
+                            'is_bridging' => 1,
+                        ]);
+                    }
+                }
+
                 $data = M_dokter::paginate(15);
 
                 Session::flash('success', $dataPcare->count . ' Data Ditemukan Dan Disimpan Di DB Lokal');
-                return view('admin.data.dokter.index', compact('data', 'dataPcare'));
+                return redirect('/superadmin/data/dokter');
+                //return view('admin.data.dokter.index', compact('data', 'dataPcare'));
             }
         } catch (\Exception $e) {
-            dd($e);
+
             Session::flash('error', 'Gagal Connect, Coba Lagi');
 
             return back();

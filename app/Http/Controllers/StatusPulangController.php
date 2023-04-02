@@ -12,28 +12,55 @@ class StatusPulangController extends Controller
     {
         $data = M_status_pulang::paginate(15);
         $dataPcare = null;
-        
+
         return view('admin.data.statuspulang.index', compact('data', 'dataPcare'));
     }
 
-    public function getStatusPulang()
+    public function getStatusPulangTrue()
     {
-        try {
-            $service = WSStatusPulang('GET', true);
+        $service = WSStatusPulang('GET', 'true');
 
-            if ($service == null) {
-                Session::flash('info', 'Data Tidak Ditemukan');
-                return back();
-            } else {
-                $dataPcare = $service;
-
-                $data = M_status_pulang::paginate(15);
-                Session::flash('success', $dataPcare->count . ' Data Ditemukan Dan Disimpan Di DB Lokal');
-                return view('admin.data.statuspulang.index', compact('data', 'dataPcare'));
+        if ($service->response == null) {
+            Session::flash('info', json_encode($service->metaData) . ' ' . json_encode($service->response));
+            return back();
+        } else {
+            foreach ($service->response->list as $item) {
+                $check = M_status_pulang::where('kdStatusPulang', $item->kdStatusPulang)->first();
+                if ($check == null) {
+                    $n = new M_status_pulang;
+                    $n->kdStatusPulang = $item->kdStatusPulang;
+                    $n->nmStatusPulang = $item->nmStatusPulang;
+                    $n->rawatInap = true;
+                    $n->save();
+                } else {
+                }
             }
-        } catch (\Exception $e) {
-            Session::flash('error', 'Gagal Connect, Coba Lagi');
+            request()->flash();
+            Session::flash('success', json_encode($service->metaData) . ' ' . json_encode($service->response));
+            return back();
+        }
+    }
+    public function getStatusPulangFalse()
+    {
+        $service = WSStatusPulang('GET', 'false');
 
+        if ($service->response == null) {
+            Session::flash('info', json_encode($service->metaData) . ' ' . json_encode($service->response));
+            return back();
+        } else {
+            foreach ($service->response->list as $item) {
+                $check = M_status_pulang::where('kdStatusPulang', $item->kdStatusPulang)->first();
+                if ($check == null) {
+                    $n = new M_status_pulang;
+                    $n->kdStatusPulang = $item->kdStatusPulang;
+                    $n->nmStatusPulang = $item->nmStatusPulang;
+                    $n->rawatInap = false;
+                    $n->save();
+                } else {
+                }
+            }
+            request()->flash();
+            Session::flash('success', json_encode($service->metaData) . ' ' . json_encode($service->response));
             return back();
         }
     }

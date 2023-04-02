@@ -52,17 +52,16 @@ class PasienController extends Controller
                     //nik
                     $response = WSCheckNomorByNik('GET', $req->noKartu);
                 }
-                $data = $response;
-
-                $req->flash();
-                if ($data == null) {
-                    Session::flash('info', 'Data Tidak Di temukan');
-                    return view('admin.pasien.add', compact('data'));
+                if ($response->response == null) {
+                    Session::flash('info', json_encode($response->metaData) . ' ' . json_encode($response->response));
+                    return back();
                 } else {
+                    $data = $response;
                     Session::flash('success', 'Data Di temukan');
                     return view('admin.pasien.add', compact('data'));
                 }
             } catch (\Exception $e) {
+                dd($e);
                 if ($e->getResponse()->getStatusCode() == 400) {
                     Session::flash('error', 'Gagal Bridging, Silahkan Check Akun Bridging');
                     return back();

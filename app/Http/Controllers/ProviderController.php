@@ -15,7 +15,25 @@ class ProviderController extends Controller
     }
     public function getProvider()
     {
-        Session::flash('success', 'Data Di temukan Dan Disimpan Di DB Lokal');
-        return back();
+        $service = WSProvider();
+
+        if ($service->response == null) {
+            Session::flash('info', json_encode($service->metaData) . ' ' . json_encode($service->response));
+            return back();
+        } else {
+            foreach ($service->response->list as $item) {
+                $check = M_provider::where('kdProvider', $item->kdProvider)->first();
+                if ($check == null) {
+                    $n = new M_provider;
+                    $n->kdProvider = $item->kdProvider;
+                    $n->nmProvider = $item->nmProvider;
+                    $n->save();
+                } else {
+                }
+            }
+            request()->flash();
+            Session::flash('success', json_encode($service->metaData) . ' ' . json_encode($service->response));
+            return back();
+        }
     }
 }

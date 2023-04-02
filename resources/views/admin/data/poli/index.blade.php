@@ -28,6 +28,7 @@
                     <th style="width: 10px">#</th>
                     <th>Kode Poli</th>
                     <th>Nama Poli</th>
+                    <th>PoliSakit</th>
                 </tr>
         
                 @foreach ($data as $key => $item)
@@ -36,6 +37,7 @@
                     <td style="widtd: 10px">{{$data->firstItem() + $key}}</td>
                     <td>{{$item->kdPoli}}</td>
                     <td>{{$item->nmPoli}}</td>
+                    <td>{{$item->poliSakit == 1 ? 'Y': 'T'}}</td>
                 </tr>    
                 @endforeach
                 </table>

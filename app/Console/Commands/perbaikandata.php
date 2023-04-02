@@ -2,10 +2,12 @@
 
 namespace App\Console\Commands;
 
+use Carbon\Carbon;
 use App\Models\M_dokter;
 use App\Models\M_pasien;
 use App\Models\T_anamnesa;
 use App\Models\T_pelayanan;
+use App\Models\T_pendaftaran;
 use Illuminate\Console\Command;
 
 class perbaikandata extends Command
@@ -42,71 +44,79 @@ class perbaikandata extends Command
     public function handle()
     {
         //perbaikan data nik ke pendaftaran
-        $pasien = M_pasien::get();
-        foreach ($pasien as $i) {
-            if ($i->nik == null) {
-            } else {
-                $pelayanan = T_pelayanan::where('nik', $i->nik)->get();
-                foreach ($pelayanan as $p) {
-                    $p->update(['m_pasien_id' => $i->id]);
-                }
-            }
-        }
+        // $pasien = M_pasien::get();
+        // foreach ($pasien as $i) {
+        //     if ($i->nik == null) {
+        //     } else {
+        //         $pelayanan = T_pelayanan::where('nik', $i->nik)->get();
+        //         foreach ($pelayanan as $p) {
+        //             $p->update(['m_pasien_id' => $i->id]);
+        //         }
+        //     }
+        // }
 
         //perbaikan data pasien pendaftaran tidak terdaftar di tabel pasien berdasarkan no Kartu
-        $pasienPelayanan = T_pelayanan::where('noKartu', '!=', null)->get();
-        foreach ($pasienPelayanan as $p) {
-            if ($p->m_pasien_id == null) {
-                $check = M_pasien::where('noKartu', $p->noKartu)->first();
-                if ($check != null) {
-                    $p->update([
-                        'm_pasien_id' => $check->id,
-                    ]);
-                } else {
-                    //create
-                    $n = new M_pasien;
-                    $n->nik = $p->nik;
-                    $n->noKartu = $p->noKartu;
-                    $n->nama = $p->nama;
-                    $n->sex = $p->sex;
-                    $n->tglLahir = $p->tglLahir;
-                    $n->save();
+        // $pasienPelayanan = T_pelayanan::where('noKartu', '!=', null)->get();
+        // foreach ($pasienPelayanan as $p) {
+        //     if ($p->m_pasien_id == null) {
+        //         $check = M_pasien::where('noKartu', $p->noKartu)->first();
+        //         if ($check != null) {
+        //             $p->update([
+        //                 'm_pasien_id' => $check->id,
+        //             ]);
+        //         } else {
+        //             //create
+        //             $n = new M_pasien;
+        //             $n->nik = $p->nik;
+        //             $n->noKartu = $p->noKartu;
+        //             $n->nama = $p->nama;
+        //             $n->sex = $p->sex;
+        //             $n->tglLahir = $p->tglLahir;
+        //             $n->save();
 
-                    $p->update(['m_pasien_id' => $n->id]);
-                }
-            }
-        }
+        //             $p->update(['m_pasien_id' => $n->id]);
+        //         }
+        //     }
+        // }
 
         //perbaikan data pasien pendaftaran tidak terdaftar di tabel pasien berdasarkan NIK
-        $pasienPelayanan = T_pelayanan::where('nik', '!=', null)->get();
-        foreach ($pasienPelayanan as $p) {
-            if ($p->m_pasien_id == null) {
-                $check = M_pasien::where('nik', $p->nik)->first();
-                if ($check != null) {
-                    $p->update([
-                        'm_pasien_id' => $check->id,
-                    ]);
-                } else {
-                    //create
-                    $n = new M_pasien;
-                    $n->nik = $p->nik;
-                    $n->noKartu = $p->noKartu;
-                    $n->nama = $p->nama;
-                    $n->sex = $p->sex;
-                    $n->tglLahir = $p->tglLahir;
-                    $n->save();
+        // $pasienPelayanan = T_pelayanan::where('nik', '!=', null)->get();
+        // foreach ($pasienPelayanan as $p) {
+        //     if ($p->m_pasien_id == null) {
+        //         $check = M_pasien::where('nik', $p->nik)->first();
+        //         if ($check != null) {
+        //             $p->update([
+        //                 'm_pasien_id' => $check->id,
+        //             ]);
+        //         } else {
+        //             //create
+        //             $n = new M_pasien;
+        //             $n->nik = $p->nik;
+        //             $n->noKartu = $p->noKartu;
+        //             $n->nama = $p->nama;
+        //             $n->sex = $p->sex;
+        //             $n->tglLahir = $p->tglLahir;
+        //             $n->save();
 
-                    $p->update(['m_pasien_id' => $n->id]);
-                }
-            }
-        }
+        //             $p->update(['m_pasien_id' => $n->id]);
+        //         }
+        //     }
+        // }
 
         //perbaikan data status pulang dari tabel anamnesa ke tabel pendaftaran
-        $anamnesa = T_anamnesa::get();
-        foreach ($anamnesa as $a) {
-            $pendaftaran = $a->pendaftaran;
-            $pendaftaran->update([
-                'kdStatusPulang' => $a->statusPulang == null ? $pendaftaran->kdStatusPulang : $a->statusPulang->kdStatusPulang
+        // $anamnesa = T_anamnesa::get();
+        // foreach ($anamnesa as $a) {
+        //     $pendaftaran = $a->pendaftaran;
+        //     $pendaftaran->update([
+        //         'kdStatusPulang' => $a->statusPulang == null ? $pendaftaran->kdStatusPulang : $a->statusPulang->kdStatusPulang
+        //     ]);
+        // }
+
+        //perbaikan tglDaftar varchar ke tanggal date
+        $pendaftaran = T_pendaftaran::get();
+        foreach ($pendaftaran as $item) {
+            $item->update([
+                'tanggal' => Carbon::parse($item->tglDaftar)->format('Y-m-d')
             ]);
         }
     }

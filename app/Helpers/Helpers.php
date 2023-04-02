@@ -4,6 +4,7 @@ use App\Models\Barang;
 use App\Models\Satuan;
 use GuzzleHttp\Client;
 use App\Models\BarangToko;
+use App\Models\Log_bridging;
 use App\Models\T_pelayanan;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,6 +17,16 @@ function hitungUmur($umur)
     $d = $today->diff($lahir)->d;
     $umur = $y . " Tahun " . $m . " Bulan " . $d . " Hari";
     return $umur;
+}
+
+function logBridging($namaService, $metaData, $response)
+{
+    $n = new Log_bridging;
+    $n->namaService = $namaService;
+    $n->code = $metaData->code;
+    $n->message = $metaData->message;
+    $n->response = $response == null ? null : json_encode($response);
+    $n->save();
 }
 function convertBulan($bulan)
 {
@@ -71,63 +82,63 @@ function checkBPJS()
     }
 }
 
-function headers()
-{
-    $user = Auth::user();
+// function headers()
+// {
+//     $user = Auth::user();
 
-    $cons_id = $user->cons_id;
-    $secret_key = $user->secret_key;
-    $username_pcare = $user->user_pcare;
-    $password_pcare = $user->pass_pcare;
-    $kdAplikasi = '095';
+//     $cons_id = $user->cons_id;
+//     $secret_key = $user->secret_key;
+//     $username_pcare = $user->user_pcare;
+//     $password_pcare = $user->pass_pcare;
+//     $kdAplikasi = '095';
 
-    date_default_timezone_set('UTC');
-    $tStamp = strval(time() - strtotime('1970-01-01 00:00:00'));
-    $signature = hash_hmac('sha256', $cons_id . "&" . $tStamp, $secret_key, true);
-    $encodedSignature = base64_encode($signature);
-    $urlencodedSignature = urlencode($encodedSignature);
+//     date_default_timezone_set('UTC');
+//     $tStamp = strval(time() - strtotime('1970-01-01 00:00:00'));
+//     $signature = hash_hmac('sha256', $cons_id . "&" . $tStamp, $secret_key, true);
+//     $encodedSignature = base64_encode($signature);
+//     $urlencodedSignature = urlencode($encodedSignature);
 
-    $Authorization = base64_encode($username_pcare . ':' . $password_pcare . ':' . $kdAplikasi);
+//     $Authorization = base64_encode($username_pcare . ':' . $password_pcare . ':' . $kdAplikasi);
 
-    $head['accept']    = 'application/json';
-    $head['Content-Type']    = 'application/json';
-    $head['X-cons-id'] = $cons_id;
-    $head['X-Timestamp'] = $tStamp;
-    $head['X-Signature'] = $encodedSignature;
-    $head['X-Authorization'] = 'Basic ' . $Authorization;
+//     $head['accept']    = 'application/json';
+//     $head['Content-Type']    = 'application/json';
+//     $head['X-cons-id'] = $cons_id;
+//     $head['X-Timestamp'] = $tStamp;
+//     $head['X-Signature'] = $encodedSignature;
+//     $head['X-Authorization'] = 'Basic ' . $Authorization;
 
-    return $head;
-}
+//     return $head;
+// }
 
-function generateHeaders()
-{
-    $user = Auth::user();
+// function generateHeaders()
+// {
+//     $user = Auth::user();
 
-    $cons_id = $user->cons_id;
-    $secret_key = $user->secret_key;
-    $username_pcare = $user->user_pcare;
-    $password_pcare = $user->pass_pcare;
-    $kdAplikasi = '095';
+//     $cons_id = $user->cons_id;
+//     $secret_key = $user->secret_key;
+//     $username_pcare = $user->user_pcare;
+//     $password_pcare = $user->pass_pcare;
+//     $kdAplikasi = '095';
 
-    date_default_timezone_set('UTC');
-    $tStamp = strval(time() - strtotime('1970-01-01 00:00:00'));
-    $signature = hash_hmac('sha256', $cons_id . "&" . $tStamp, $secret_key, true);
-    $encodedSignature = base64_encode($signature);
-    $urlencodedSignature = urlencode($encodedSignature);
+//     date_default_timezone_set('UTC');
+//     $tStamp = strval(time() - strtotime('1970-01-01 00:00:00'));
+//     $signature = hash_hmac('sha256', $cons_id . "&" . $tStamp, $secret_key, true);
+//     $encodedSignature = base64_encode($signature);
+//     $urlencodedSignature = urlencode($encodedSignature);
 
-    $Authorization = base64_encode($username_pcare . ':' . $password_pcare . ':' . $kdAplikasi);
+//     $Authorization = base64_encode($username_pcare . ':' . $password_pcare . ':' . $kdAplikasi);
 
-    $head['X-cons-id'] = $cons_id;
-    $head['X-Timestamp'] = $tStamp;
-    $head['X-Signature'] = $encodedSignature;
-    $head['X-Authorization'] = $Authorization;
+//     $head['X-cons-id'] = $cons_id;
+//     $head['X-Timestamp'] = $tStamp;
+//     $head['X-Signature'] = $encodedSignature;
+//     $head['X-Authorization'] = $Authorization;
 
-    $u = Auth::user();
-    $u->x_timestamp = $head['X-Timestamp'];
-    $u->x_signature = $head['X-Signature'];
-    $u->x_authorization = 'Basic ' . $head['X-Authorization'];
-    $u->save();
-}
+//     $u = Auth::user();
+//     $u->x_timestamp = $head['X-Timestamp'];
+//     $u->x_signature = $head['X-Signature'];
+//     $u->x_authorization = 'Basic ' . $head['X-Authorization'];
+//     $u->save();
+// }
 
 function antrean($param)
 {
@@ -167,6 +178,7 @@ function headerDevelopment()
     $head['X-Signature'] = $encodedSignature;
     $head['X-Authorization'] = 'Basic ' . $Authorization;
     $head['user_key'] = $user_key;
+    //dd($head);
     //$head['user_pcare'] = $username_pcare;
     //$head['pass_pcare'] = $password_pcare;
 
@@ -288,9 +300,11 @@ function WSKesadaran($type = 'GET')
         $response = $client->request($type, 'kesadaran', [
             'headers' => headerDevelopment(),
         ]);
-        $string = json_decode((string)$response->getBody())->response;
+        $data = json_decode((string)$response->getBody());
+        $data->response = decryptString($data->response);
 
-        return decryptString($string);
+        logBridging('kesadaran', $data->metaData, $data->response);
+        return $data;
     } else {
         $client = urlProduction();
         $response = $client->request($type, 'kesadaran', [
@@ -311,9 +325,12 @@ function WSPoli($type = 'GET', $param1 = 0, $param2 = 1000)
         $response = $client->request($type, 'poli/fktp/' . '/' . $param1 . '/' . $param2, [
             'headers' => headerDevelopment(),
         ]);
-        $string = json_decode((string)$response->getBody())->response;
 
-        return decryptString($string);
+        $data = json_decode((string)$response->getBody());
+        $data->response = decryptString($data->response);
+
+        logBridging('poli', $data->metaData, $data->response);
+        return $data;
     } else {
         $client = urlProduction();
         $response = $client->request($type, 'poli/fktp/' . '/' . $param1 . '/' . $param2, [
@@ -334,9 +351,12 @@ function WSProvider($type = 'GET', $param1 = 0, $param2 = 1000)
         $response = $client->request($type, 'provider/' . $param1 . '/' . $param2, [
             'headers' => headerDevelopment(),
         ]);
-        $string = json_decode((string)$response->getBody())->response;
 
-        return decryptString($string);
+        $data = json_decode((string)$response->getBody());
+        $data->response = decryptString($data->response);
+
+        logBridging('provider', $data->metaData, $data->response);
+        return $data;
     } else {
         $client = urlProduction();
         $response = $client->request($type, 'provider/' . $param1 . '/' . $param2, [
@@ -352,14 +372,23 @@ function WSStatusPulang($type = 'GET', $param1 = true)
     $mode = Auth::user()->mode;
 
     if ($mode == 0) {
-        $client = urlDevelopment();
+        try {
+            $client = urlDevelopment();
 
-        $response = $client->request($type, 'statuspulang/rawatInap/' . $param1, [
-            'headers' => headerDevelopment(),
-        ]);
-        $string = json_decode((string)$response->getBody())->response;
+            $response = $client->request($type, 'statuspulang/rawatInap/' . $param1, [
+                'headers' => headerDevelopment(),
+            ]);
 
-        return decryptString($string);
+            $data = json_decode((string)$response->getBody());
+            $data->response = decryptString($data->response);
+
+            logBridging('status-pulang', $data->metaData, $data->response);
+            return $data;
+        } catch (\Exception $e) {
+            $data = json_decode((string)$e->getResponse()->getBody());
+            logBridging('status-pulang', $data->metaData, $data->response);
+            return $data;
+        }
     } else {
         $client = urlProduction();
         $response = $client->request($type, 'statuspulang/rawatInap/' . $param1, [
@@ -380,9 +409,11 @@ function WSSpesialis($type = 'GET')
         $response = $client->request($type, 'spesialis', [
             'headers' => headerDevelopment(),
         ]);
-        $string = json_decode((string)$response->getBody())->response;
+        $data = json_decode((string)$response->getBody());
+        $data->response = decryptString($data->response);
 
-        return decryptString($string);
+        logBridging('spesialis', $data->metaData, $data->response);
+        return $data;
     } else {
         $client = urlProduction();
         $response = $client->request($type, 'spesialis', [
@@ -403,9 +434,11 @@ function WSSubSpesialis($type = 'GET', $param1 = null)
         $response = $client->request($type, 'spesialis/' . $param1 . '/subspesialis', [
             'headers' => headerDevelopment(),
         ]);
-        $string = json_decode((string)$response->getBody())->response;
+        $data = json_decode((string)$response->getBody());
+        $data->response = decryptString($data->response);
 
-        return decryptString($string);
+        logBridging('subspesialis', $data->metaData, $data->response);
+        return $data;
     } else {
         $client = urlProduction();
         $response = $client->request($type, 'spesialis/' . $param1 . '/subspesialis',  [
@@ -421,15 +454,23 @@ function WSCheckNomor($type = 'GET', $param1 = null)
     $mode = Auth::user()->mode;
 
     if ($mode == 0) {
-        $client = urlDevelopment();
+        try {
+            $client = urlDevelopment();
 
-        $response = $client->request($type, 'peserta/' . $param1, [
-            'headers' => headerDevelopment(),
-        ]);
+            $response = $client->request($type, 'peserta/' . $param1, [
+                'headers' => headerDevelopment(),
+            ]);
 
-        $string = json_decode((string)$response->getBody())->response;
+            $data = json_decode((string)$response->getBody());
+            $data->response = decryptString($data->response);
 
-        return decryptString($string);
+            logBridging('peserta', $data->metaData, $data->response);
+            return $data;
+        } catch (\Exception $e) {
+            $data = json_decode((string)$e->getResponse()->getBody());
+            logBridging('peserta', $data->metaData, $data->response);
+            return $data;
+        }
     } else {
         $client = urlProduction();
         $response = $client->request($type, 'peserta/' . $param1,  [
@@ -445,15 +486,23 @@ function WSCheckNomorByNik($type = 'GET', $param1 = null)
     $mode = Auth::user()->mode;
 
     if ($mode == 0) {
-        $client = urlDevelopment();
+        try {
+            $client = urlDevelopment();
 
-        $response = $client->request($type, 'peserta/nik/' . $param1, [
-            'headers' => headerDevelopment(),
-        ]);
+            $response = $client->request($type, 'peserta/nik/' . $param1, [
+                'headers' => headerDevelopment(),
+            ]);
 
-        $string = json_decode((string)$response->getBody())->response;
+            $data = json_decode((string)$response->getBody());
+            $data->response = decryptString($data->response);
 
-        return decryptString($string);
+            logBridging('peserta', $data->metaData, $data->response);
+            return $data;
+        } catch (\Exception $e) {
+            $data = json_decode((string)$e->getResponse()->getBody());
+            logBridging('peserta', $data->metaData, $data->response);
+            return $data;
+        }
     } else {
         $client = urlProduction();
         $response = $client->request($type, 'peserta/nik/' . $param1,  [
@@ -499,9 +548,11 @@ function WSSarana($type = 'GET')
             'headers' => headerDevelopment(),
         ]);
 
-        $string = json_decode((string)$response->getBody())->response;
+        $data = json_decode((string)$response->getBody());
+        $data->response = decryptString($data->response);
 
-        return decryptString($string);
+        logBridging('sarana', $data->metaData, $data->response);
+        return $data;
     } else {
         $client = urlProduction();
         $response = $client->request($type, 'spesialis/sarana', [
@@ -522,9 +573,11 @@ function WSKhusus($type = 'GET')
             'headers' => headerDevelopment(),
         ]);
 
-        $string = json_decode((string)$response->getBody())->response;
+        $data = json_decode((string)$response->getBody());
+        $data->response = decryptString($data->response);
 
-        return decryptString($string);
+        logBridging('sarana', $data->metaData, $data->response);
+        return $data;
     } else {
         $client = urlProduction();
         $response = $client->request($type, 'spesialis/khusus', [

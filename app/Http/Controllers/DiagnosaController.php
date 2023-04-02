@@ -19,6 +19,22 @@ class DiagnosaController extends Controller
         $dataPcare = null;
         return view('admin.data.diagnosa.index', compact('data', 'dataPcare'));
     }
+
+    public function store(Request $req)
+    {
+        foreach ($req->kdDiag as $key => $item) {
+            $check = M_diagnosa::where('kdDiag', $item)->first();
+            if ($check == null) {
+                $n = new M_diagnosa;
+                $n->kdDiag = $item;
+                $n->nmDiag = $req->nmDiag[$key];
+                $n->save();
+            }
+        }
+        Session::flash('success', 'Data Berhasil Disimpan');
+        return redirect('/superadmin/data/diagnosa/');
+    }
+
     public function indexD($id)
     {
         $data = T_pelayanan::find($id);

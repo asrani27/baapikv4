@@ -17,7 +17,7 @@
                 <i class="fa fa-database"></i>
                     <h3 class="box-title">Sarana</h3>
                     <div class="box-tools">
-                        <a href="#" class='btn btn-sm btn-primary'>
+                        <a href="/superadmin/data/sarana/get" class='btn btn-sm btn-primary'>
                             <i class="fa fa-repeat"></i> Get Sarana</a>
                     </div>
             </div>

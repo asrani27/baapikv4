@@ -17,7 +17,7 @@
                 <i class="fa fa-database"></i>
                     <h3 class="box-title">Kesadaran</h3>
                     <div class="box-tools">
-                        <a href="/superadmin/data/status-pulang/get" class='btn btn-sm btn-primary'>
+                        <a href="/superadmin/data/kesadaran/get" class='btn btn-sm btn-primary'>
                             <i class="fa fa-repeat"></i> Get Kesadaran</a>
                     </div>
             </div>

@@ -13,10 +13,12 @@ class KesadaranController extends Controller
         $data = M_kesadaran::paginate(15);
         return view('admin.data.kesadaran.index', compact('data'));
     }
-    
+
     public function getKesadaran()
     {
-        Session::flash('success', 'Data Di temukan Dan Disimpan Di DB Lokal');
+        $dataPcare = WSKesadaran();
+
+        Session::flash('success', json_encode($dataPcare->metaData) . ' ' . json_encode($dataPcare->response));
         return back();
     }
 }

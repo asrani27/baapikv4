@@ -16,15 +16,15 @@ class PoliController extends Controller
 
     public function getPoli()
     {
-        try {
-            $service = WSPoli('GET', 0, 100);
+        $service = WSPoli('GET', 0, 100);
 
-            if ($service == null) {
-                Session::flash('info', 'Data Tidak Di temukan');
-                request()->flash();
+        try {
+            if ($service->response == null) {
+                Session::flash('info', json_encode($service->metaData) . ' ' . json_encode($service->response));
+
                 return back();
             } else {
-                foreach ($service->list as $item) {
+                foreach ($service->response->list as $item) {
                     $check = M_poli::where('kdPoli', $item->kdPoli)->first();
                     if ($check == null) {
                         $n = new M_poli;
@@ -36,10 +36,11 @@ class PoliController extends Controller
                     }
                 }
                 request()->flash();
-                Session::flash('success', 'Data Di temukan Dan Disimpan Di DB Lokal');
+                Session::flash('success', json_encode($service->metaData) . ' ' . json_encode($service->response));
                 return back();
             }
         } catch (\Exception $e) {
+
             $message = json_decode((string)$e->getResponse()->getBody())->metaData->message;
             Session::flash('error', $message);
             return back();

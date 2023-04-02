@@ -17,8 +17,10 @@
                 <i class="fa fa-database"></i>
                     <h3 class="box-title">Status Pulang</h3>
                     <div class="box-tools">
-                        <a href="/superadmin/data/status-pulang/get" class='btn btn-sm btn-primary'>
-                            <i class="fa fa-repeat"></i> Get Status Pulang</a>
+                        <a href="/superadmin/data/status-pulang/get/true" class='btn btn-sm btn-primary'>
+                            <i class="fa fa-repeat"></i> Get Status Pulang True</a>
+                        <a href="/superadmin/data/status-pulang/get/false" class='btn btn-sm btn-primary'>
+                            <i class="fa fa-repeat"></i> Get Status Pulang False</a>
                     </div>
             </div>
 

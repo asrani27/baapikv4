@@ -2,34 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\M_sarana;
 use Illuminate\Http\Request;
+use App\Models\M_sub_spesialis;
 use Illuminate\Support\Facades\Session;
 
-class SaranaController extends Controller
+class SubSpesialisController extends Controller
 {
-    public function index()
+    public function getSubSpesialis($id, $kdSpesialis)
     {
-        $data = M_sarana::paginate(15);
-        $dataPcare = null;
 
-        return view('admin.data.sarana.index', compact('data', 'dataPcare'));
-    }
-    public function getSarana()
-    {
-        $service = WSSarana();
+        $service = WSSubSpesialis('GET', $kdSpesialis);
 
         if ($service->response == null) {
             Session::flash('info', json_encode($service->metaData) . ' ' . json_encode($service->response));
             return back();
         } else {
             foreach ($service->response->list as $item) {
-                $check = M_sarana::where('kdSarana', $item->kdSarana)->first();
+                $check = M_sub_spesialis::where('kdSubSpesialis', $item->kdSubSpesialis)->first();
                 if ($check == null) {
-                    $n = new M_sarana;
-                    $n->kdSarana = $item->kdSarana;
-                    $n->nmSarana = $item->nmSarana;
+                    $n = new M_sub_spesialis;
+                    $n->kdSubSpesialis = $item->kdSubSpesialis;
+                    $n->nmSubSpesialis = $item->nmSubSpesialis;
+                    $n->kdPoliRujuk = $item->kdPoliRujuk;
+                    $n->spesialis_id = $id;
                     $n->save();
+                } else {
+                    $check->update(['spesialis_id' => $id]);
                 }
             }
             request()->flash();

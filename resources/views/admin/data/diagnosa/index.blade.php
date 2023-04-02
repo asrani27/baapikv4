@@ -67,14 +67,20 @@
             @if ($dataPcare == null)
                 
             @else
-                <a href="#" class="btn btn-flat btn-sm btn-primary">SIMPAN KE LOKAL DB</a>
+            <form method="post" action="/superadmin/data/diagnosa">
+                @csrf
+            
+                <button type="submit" class="btn btn-flat btn-sm btn-primary">SIMPAN KE LOKAL DB</button>
                 <ul>
-                @foreach ($dataPcare->list as $item)
-                <li>
-                    {{$item->kdDiag}} - {{$item->nmDiag}}
-                </li>
-                @endforeach
+                    @foreach ($dataPcare->list as $item)
+                    <li>
+                        {{$item->kdDiag}} - {{$item->nmDiag}}
+                    </li>
+                    <input type="hidden" name="kdDiag[]" value="{{$item->kdDiag}}">
+                    <input type="hidden" name="nmDiag[]" value="{{$item->nmDiag}}">
+                    @endforeach
                 </ul>
+            </form>
             @endif
         </div>
         </div>
