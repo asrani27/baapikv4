@@ -56,9 +56,11 @@ class SettingController extends Controller
             return back();
         }
 
+        $data = WSDiagnosa('GET', 'A00', 0, 10);
+
         try {
             $data = WSDiagnosa('GET', 'A00', 0, 10);
-            //dd($data);
+            dd($data);
             Auth::user()->update(['is_connect' => 1]);
             Session::flash('success', 'Connection Success');
             return back();

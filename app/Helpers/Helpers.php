@@ -246,13 +246,13 @@ function WSDiagnosa($type = 'GET', $kode = '0', $row = 0, $limit = 10000)
 {
     $mode = Auth::user()->mode;
 
+
     if ($mode == 0) {
         $client = urlDevelopment();
 
         $response = $client->request($type, 'diagnosa/' . $kode . '/' . $row . '/' . $limit, [
             'headers' => headerDevelopment(),
         ]);
-
         $string = json_decode((string)$response->getBody())->response;
 
         return decryptString($string);
