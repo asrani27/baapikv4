@@ -6,10 +6,10 @@ use App\Models\M_diagnosa;
 use Carbon\Carbon;
 use App\Models\M_poli;
 use App\Models\T_pelayanan;
-use Illuminate\Http\Request;
 use App\Models\T_pendaftaran;
 use App\Models\M_status_pulang;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
 
 class PelayananController extends Controller
 {
