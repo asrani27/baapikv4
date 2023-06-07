@@ -15,7 +15,7 @@ class PelayananController extends Controller
 {
     public function index()
     {
-        $data = T_pelayanan::where('ke_poli', 1)->orderBy('id', 'DESC')->paginate(15);
+        $data = \App\Models\T_pelayanan::where('ke_poli', 1)->orderBy('id', 'DESC')->paginate(15);
 
         $data->getCollection()->transform(function ($item) {
             $item->status_pulang = M_status_pulang::where('kdStatusPulang', $item->kdStatusPulang)->first();
