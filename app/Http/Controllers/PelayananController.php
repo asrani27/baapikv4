@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\M_diagnosa;
 use Carbon\Carbon;
 use App\Models\M_poli;
-use App\Models\T_pelayanan;
 use App\Models\T_pendaftaran;
 use App\Models\M_status_pulang;
+use App\Models\T_pelayanan;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
@@ -15,7 +15,7 @@ class PelayananController extends Controller
 {
     public function index()
     {
-        $data = T_pendaftaran::where('ke_poli', 1)->orderBy('id', 'DESC')->paginate(15);
+        $data = T_pelayanan::where('ke_poli', 1)->orderBy('id', 'DESC')->paginate(15);
 
         $data->getCollection()->transform(function ($item) {
             $item->status_pulang = M_status_pulang::where('kdStatusPulang', $item->kdStatusPulang)->first();
