@@ -90,6 +90,7 @@ Route::group(['middleware' => ['auth', 'role:superadmin']], function () {
     Route::get('superadmin/setting/akun-bridging/development/testing', [SettingController::class, 'developmentTesting']);
     Route::post('superadmin/setting/akun-bridging/production', [SettingController::class, 'production']);
     Route::get('superadmin/setting/gantipassword', [SettingController::class, 'gantipassword']);
+    Route::post('superadmin/setting/gantipassword', [SettingController::class, 'updatepassword']);
     Route::get('superadmin/pasien', [PasienController::class, 'index']);
     Route::get('superadmin/pasien/add', [PasienController::class, 'add']);
     Route::post('superadmin/pasien/add', [PasienController::class, 'store']);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class SettingController extends Controller
@@ -17,6 +18,25 @@ class SettingController extends Controller
     public function gantipassword()
     {
         return view('admin.setting.gantipassword');
+    }
+
+    public function updatepassword(Request $req)
+    {
+        if (Hash::check($req->password_lama, Auth::user()->password)) {
+            if ($req->password1 != $req->password2) {
+                Session::flash('warning', 'Password Baru Tidak Sama');
+                return back();
+            } else {
+                Auth::user()->update([
+                    'password' => bcrypt($req->password1)
+                ]);
+                Session::flash('success', 'Berhasil Di update');
+                return back();
+            }
+        } else {
+            Session::flash('warning', 'Password Lama Salah');
+            return back();
+        }
     }
 
     public function development(Request $req)
