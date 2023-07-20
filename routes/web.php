@@ -145,6 +145,7 @@ Route::group(['middleware' => ['auth', 'role:superadmin']], function () {
 
     Route::get('superadmin/manualbook', [ManualBookController::class, 'index']);
     Route::get('superadmin/manualbook/create', [ManualBookController::class, 'create']);
+    Route::get('superadmin/manualbook/download', [ManualBookController::class, 'download']);
     Route::post('superadmin/manualbook/create', [ManualBookController::class, 'store']);
     Route::get('superadmin/manualbook/edit/{id}', [ManualBookController::class, 'edit']);
     Route::post('superadmin/manualbook/edit/{id}', [ManualBookController::class, 'update']);

@@ -53,7 +53,7 @@
           <th style="width: 10px">#</th>
           <th>No Antrian</th>
           <th>Tanggal Daftar</th>
-          <th>No. Urut</th>
+          <th>No. RM</th>
           <th>NIK</th>
           <th>No. Kartu</th>
           <th>Nama</th>
@@ -78,7 +78,8 @@
             <td style="widtd: 10px">{{$data->firstItem() + $key}}</td>
             <td>{{$item->nomor_antrian}}</td>
             <td>{{$item->tglDaftar}}</td>
-            <td>{{$item->noUrut}}</td>
+            <td>{{$item->pasien == null ? '': $item->pasien->noRM}}</td>
+            {{-- <td>{{$item->noUrut}}</td> --}}
             <td>{{$item->nik}}</td>
             <td>{{$item->noKartu}}</td>
             <td>{{$item->nama}}</td>

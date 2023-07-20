@@ -42,6 +42,11 @@
           <!-- /.box-header -->
           <!-- form start -->
           <div class="box-body table-responsive">
+            <strong>
+            NIK : {{$data->nik}} <br/>
+            No RM : {{$data->noRM}} <br/>
+            Nama : {{$data->nama}}
+          </strong>
             <table class="table table-condensed table-bordered">
               <tr class="bg-primary" style="font-size: 10px;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">
                 <th style="width: 10px">#</th>

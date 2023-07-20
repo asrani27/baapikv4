@@ -10,6 +10,7 @@
     </h1>
     <ol class="breadcrumb">
         <a href="/superadmin/manualbook/create" class="btn btn-xs btn-primary"><i class="fa fa-plus-circle"></i> Tambah Manual Book</a>
+        <a href="/superadmin/manualbook/download" class="btn btn-xs btn-danger"><i class="fa fa-download"></i> Download Manual Book PDF</a>
         
     </ol>
 </section>

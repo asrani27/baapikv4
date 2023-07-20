@@ -29,7 +29,7 @@
         <li class="{{ (request()->is('superadmin/manajemen-obat/masuk')) ? 'active' : '' }}"><a href="/superadmin/manajemen-obat/masuk"><i class="fa fa-circle-o"></i> Obat Masuk</a></li>
         <li class="{{ (request()->is('superadmin/manajemen-obat/keluar')) ? 'active' : '' }}"><a href="/superadmin/manajemen-obat/keluar"><i class="fa fa-circle-o"></i> Obat Keluar</a></li>
       </ul>
-    </li>
+    </li> --}}
     <li class="{{ (request()->is('superadmin/laporan*')) ? 'active' : '' }} treeview">
         <a href="#">
           <i class="fa fa-clipboard"></i> <span>Laporan</span>
@@ -38,12 +38,13 @@
           </span>
         </a>
         <ul class="treeview-menu">
+          <li class="{{ (request()->is('superadmin/laporan/kunjungan')) ? 'active' : '' }}"><a href="/superadmin/laporan/kunjungan"><i class="fa fa-circle-o"></i> Kunjungan Pasien</a></li>
           <li class="{{ (request()->is('superadmin/laporan/lb1')) ? 'active' : '' }}"><a href="/superadmin/laporan/lb1"><i class="fa fa-circle-o"></i> LB 1</a></li>
           <li class="{{ (request()->is('superadmin/laporan/lb2')) ? 'active' : '' }}"><a href="/superadmin/laporan/lb2"><i class="fa fa-circle-o"></i> LB 2</a></li>
           <li class="{{ (request()->is('superadmin/laporan/lb3')) ? 'active' : '' }}"><a href="/superadmin/laporan/lb3"><i class="fa fa-circle-o"></i> LB 3</a></li>
           <li class="{{ (request()->is('superadmin/laporan/lb4')) ? 'active' : '' }}"><a href="/superadmin/laporan/lb4"><i class="fa fa-circle-o"></i> LB 4</a></li>
         </ul>
-    </li> --}}
+    </li>
 
     <li class="{{ (request()->is('superadmin/data*')) ? 'active' : '' }} treeview">
         <a href="#">
@@ -78,7 +79,7 @@
           <li class="{{ (request()->is('superadmin/setting/gantipassword')) ? 'active' : '' }}"><a href="/superadmin/setting/gantipassword"><i class="fa fa-circle-o"></i> Ganti Password</a></li>
         </ul>
     </li>
-    <li class="{{ (request()->is('superadmin/logbridging*')) ? 'active' : '' }}"><a href="/superadmin/logbridging"><i class="fa fa-history"></i> <span>Log Bridging</span></a></li>
+    {{-- <li class="{{ (request()->is('superadmin/logbridging*')) ? 'active' : '' }}"><a href="/superadmin/logbridging"><i class="fa fa-history"></i> <span>Log Bridging</span></a></li> --}}
     <li class="{{ (request()->is('superadmin/manualbook*')) ? 'active' : '' }}"><a href="/superadmin/manualbook"><i class="fa fa-book"></i> <span>Manual Book</span></a></li>
     </ul>
     <!-- /.sidebar-menu -->

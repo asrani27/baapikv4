@@ -20,7 +20,7 @@
                     <div class="form-group">
                       <label class="col-sm-2 control-label">No RM</label>
                       <div class="col-sm-4">
-                        <input type="text" class="form-control" value="{{$data->noRM}}" readonly>
+                        <input type="text" class="form-control" value="{{$data->pasien == null ? '': $data->pasien->noRM}}" readonly>
                       </div>
                       <label class="col-sm-2 control-label">Tanggal Daftar</label>
                       <div class="col-sm-4">

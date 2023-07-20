@@ -61,7 +61,7 @@ class PasienController extends Controller
                     return view('admin.pasien.add', compact('data'));
                 }
             } catch (\Exception $e) {
-                dd($e);
+
                 if ($e->getResponse()->getStatusCode() == 400) {
                     Session::flash('error', 'Gagal Bridging, Silahkan Check Akun Bridging');
                     return back();
@@ -109,6 +109,7 @@ class PasienController extends Controller
     {
         $pasien = M_pasien::find($id);
         $poli = M_poli::where('kdPoli', $req->kdPoli)->first();
+        //dd($pasien->kunjSakit);
         DB::beginTransaction();
         try {
             $db = T_pendaftaran::where('tglDaftar', Carbon::parse($req->tglDaftar)->format('d-m-Y'))->where('kdPoli', $req->kdPoli)->get();
@@ -122,7 +123,7 @@ class PasienController extends Controller
             $n = new T_pendaftaran;
             $n->tglDaftar = Carbon::parse($req->tglDaftar)->format('d-m-Y');
             $n->kdProviderPeserta = $pasien->kdProviderPeserta;
-            $n->kunjSakit         = $pasien->kunjSakit;
+            //$n->kunjSakit         = 'ASU';
             $n->kdTkp             = $pasien->kdTkp;
             $n->noKartu           = $pasien->noKartu;
             $n->nik               = $pasien->nik;
@@ -137,7 +138,7 @@ class PasienController extends Controller
             $n->daftarVia         = 'offline';
             $n->nomor_antrian     = $antrian;
             $n->save();
-
+            //dd($n);
             DB::commit();
             Session::flash('success', 'Berhasil Daftar');
             return redirect('/superadmin/pendaftaran');
@@ -166,7 +167,7 @@ class PasienController extends Controller
             $n = new T_pendaftaran;
             $n->tglDaftar = Carbon::parse($req->tglDaftar)->format('d-m-Y');
             $n->kdProviderPeserta = $pasien->kdProviderPeserta;
-            $n->kunjSakit         = $pasien->kunjSakit;
+            //$n->kunjSakit         = $pasien->kunjSakit;
             $n->kdTkp             = $pasien->kdTkp;
             $n->noKartu           = $pasien->noKartu;
             $n->nik               = $pasien->nik;
