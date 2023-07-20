@@ -129,6 +129,8 @@ Route::group(['middleware' => ['auth', 'role:superadmin']], function () {
     Route::get('superadmin/pelayanan/periksa/{id}/tindakan/{id_tindakan}/delete', [TindakanController::class, 'deleteD']);
     Route::get('superadmin/pelayanan/periksa/{id}/laboratorium', [LaboratoriumController::class, 'index']);
 
+    Route::get('superadmin/laporan/kunjungan', [LaporanController::class, 'kunjungan']);
+    Route::post('superadmin/laporan/kunjungan', [LaporanController::class, 'searchKunjungan']);
     Route::get('superadmin/laporan/lb1', [LaporanController::class, 'lb1']);
     Route::get('superadmin/laporan/lb2', [LaporanController::class, 'lb2']);
     Route::get('superadmin/laporan/lb3', [LaporanController::class, 'lb3']);
