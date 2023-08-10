@@ -38,7 +38,7 @@
                                 
                                 <option value="">-tenaga medis 2-</option>
                                 @foreach ($tm1 as $item)
-                                    <option value="{{$item->kdDokter}}">{{$item->nmDokter}}</option>
+                                    <option value="{{$item->kdDokter}}" {{$data->anamnesa->kdDokter2 == $item->kdDokter ? 'selected':''}}>{{$item->nmDokter}}</option>
                                 @endforeach
                             </select>
                           </div>
