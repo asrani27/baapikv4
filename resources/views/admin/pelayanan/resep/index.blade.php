@@ -32,15 +32,9 @@
                           </div>
                         </div>
                         <div class="form-group">
-                          <label class="col-sm-2 control-label">Signa 1</label>
+                          <label class="col-sm-2 control-label">Signa</label>
                           <div class="col-sm-10">
                             <input type="text" class="form-control" name="signa1" required>
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label class="col-sm-2 control-label">Signa 2</label>
-                          <div class="col-sm-10">
-                            <input type="text" class="form-control" name="signa2" required>
                           </div>
                         </div>
                         <div class="form-group">
@@ -50,9 +44,14 @@
                           </div>
                         </div>
                         <div class="form-group">
-                          <label class="col-sm-2 control-label">Jumlah Permintaan</label>
+                          <label class="col-sm-2 control-label">Aturan Pakai</label>
                           <div class="col-sm-10">
-                            <input type="text" class="form-control" name="jmlPermintaan" required>
+                            <select name="aturan" class="form-control" required>
+                              <option value="">-pilih-</option>
+                              <option value="SEBELUM MAKAN">SEBELUM MAKAN</option>
+                              <option value="SESUDAH MAKAN">SESUDAH MAKAN</option>
+                              <option value="SAAT MAKAN">SAAT MAKAN</option>
+                            </select>
                           </div>
                         </div>
                         <div class="form-group">
@@ -79,10 +78,9 @@
                         <th style="width: 10px">#</th>
                         <th>Kode</th>
                         <th>Nama Obat</th>
-                        <th>Signa 1</th>
-                        <th>Signa 2</th>
+                        <th>Signa </th>
                         <th>Jml Obat</th>
-                        <th>Jml permintaan</th>
+                        <th>Aturan Pakai</th>
                         <th></th>
                       </tr>
               
@@ -97,9 +95,8 @@
                           <td>{{$item->kode}}</td>
                           <td>{{$item->nama}}</td>
                           <td>{{$item->signa1}}</td>
-                          <td>{{$item->signa2}}</td>
                           <td>{{$item->jmlObat}}</td>
-                          <td>{{$item->jmlPermintaan}}</td>
+                          <td>{{$item->aturan}}</td>
                           <td>
                               <a href="/superadmin/pelayanan/periksa/{{$id}}/resep/{{$item->id}}/delete" class="btn btn-danger btn-flat btn-xs"onclick="return confirm('Yakin Ingin Di Hapus?');">
                                 <i class="fa fa-trash"></i></a>
