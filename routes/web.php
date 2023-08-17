@@ -58,6 +58,10 @@ Route::group(['middleware' => ['auth', 'role:superadmin']], function () {
     Route::get('superadmin/data/diagnosa/get', [DiagnosaController::class, 'getDiagnosa']);
     Route::get('superadmin/data/diagnosa/cari', [DiagnosaController::class, 'cari']);
 
+    Route::get('superadmin/data/diagnosa/{id}/delete', [DiagnosaController::class, 'deleteData']);
+    Route::post('superadmin/data/diagnosa/create', [DiagnosaController::class, 'storeManual']);
+    Route::post('superadmin/data/diagnosa/update', [DiagnosaController::class, 'update']);
+
     Route::get('superadmin/data/poli', [PoliController::class, 'index']);
     Route::get('superadmin/data/poli/get', [PoliController::class, 'getPoli']);
     Route::get('superadmin/data/dokter', [DokterController::class, 'index']);

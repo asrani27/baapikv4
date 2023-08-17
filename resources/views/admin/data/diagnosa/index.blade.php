@@ -12,6 +12,7 @@
 <section class="content">
 <div class="row">
     <div class="col-md-12">
+        <button type="button" class="btn btn-primary btn-sm btn-flat" data-toggle="modal" data-target="#modal-add" data-backdrop="static" data-keyboard="false"><i class="fa fa-plus"></i>  Tambah </button><br/><br/>
         <div class="box box-primary">
             <div class="box-header with-border">
                 <i class="fa fa-database"></i>
@@ -35,6 +36,7 @@
                     <th style="width: 10px">#</th>
                     <th>Kode Diagnosa</th>
                     <th>Nama Diagnosa</th>
+                    <th></th>
                 </tr>
         
                 @foreach ($data as $key => $item)
@@ -43,6 +45,11 @@
                     <td style="widtd: 10px">{{$data->firstItem() + $key}}</td>
                     <td>{{$item->kdDiag}}</td>
                     <td>{{$item->nmDiag}}</td>
+                    <td>
+                    <a href="#" class="btn btn-primary btn-xs btn-flat edit-diagnosa" data-id="{{$item->id}}"
+                        data-kddiag="{{$item->kdDiag}}" data-nmdiag="{{$item->nmDiag}}"><i class="fa fa-edit"></i>  Edit</a>
+                        <a href="/superadmin/data/diagnosa/{{$item->id}}/delete" class="btn btn-danger btn-xs btn-flat" onclick="return confirm('Yakin ingin di hapus');"> <i class="fa fa-trash"></i>  Delete</a>
+                    </td>
                 </tr>    
                 @endforeach
                 </table>
@@ -87,7 +94,80 @@
     </div>
 </div>
 </section>
+
+
+<div class="modal fade" id="modal-add">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title"><i class="ion ion-clipboard"></i> Tambah Diagnosa</h4>
+        </div>
+        <form method="post" action="/superadmin/data/diagnosa/create">
+        <div class="modal-body">
+            @csrf
+            <div class="form-group">
+                <label>Kode </label>
+                <input type="text" class="form-control" name="kdDiag" placeholder="Kode">
+            </div>
+            <div class="form-group">
+                <label>Nama Diagnosa</label>
+                <input type="text" class="form-control" name="nmDiag" placeholder="Nama">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn bg-grey pull-left" data-dismiss="modal"><i class="fa fa-sign-out"></i> Close</button>
+          <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
+        </div>
+        </form>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="modal-edit">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title"><i class="ion ion-clipboard"></i> Edit Diagnosa</h4>
+        </div>
+        <form method="post" action="/superadmin/data/diagnosa/update">
+        <div class="modal-body">
+            @csrf
+            <div class="form-group">
+                <label>Kode</label>
+                <input type="text" id="kdDiag" class="form-control" name="kdDiag" placeholder="Kode">
+            </div>
+            <div class="form-group">
+                <label>Nama Diagnosa</label>
+                <input type="text" id="nmDiag" class="form-control" name="nmDiag" placeholder="Nama">
+                <input type="hidden" id="diagnosa_id" class="form-control" name="diagnosa_id">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn bg-grey pull-left" data-dismiss="modal"><i class="fa fa-sign-out"></i> Close</button>
+          <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Update</button>
+        </div>
+        </form>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
 @endsection
 @push('js')
     
+    
+<script>
+    $(document).on('click', '.edit-diagnosa', function() {
+    $('#diagnosa_id').val($(this).data('id'));
+    $('#kdDiag').val($(this).data('kddiag'));
+    $('#nmDiag').val($(this).data('nmdiag'));
+    console.log($(this).data('id'));
+    $("#modal-edit").modal();
+  });
+  </script>
 @endpush

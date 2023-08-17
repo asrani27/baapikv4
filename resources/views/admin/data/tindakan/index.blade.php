@@ -124,7 +124,7 @@
       <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
-  </div>
+</div>
 </section>
 @if ($dataPcare != null)
     @foreach ($dataPcare->list as $item)

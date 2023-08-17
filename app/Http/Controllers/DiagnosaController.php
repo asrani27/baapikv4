@@ -15,11 +15,35 @@ class DiagnosaController extends Controller
 
     public function index()
     {
-        $data = M_diagnosa::paginate(15);
+        $data = M_diagnosa::orderBy('id', 'desc')->paginate(15);
         $dataPcare = null;
         return view('admin.data.diagnosa.index', compact('data', 'dataPcare'));
     }
 
+    public function storeManual(Request $req)
+    {
+        $check = M_diagnosa::where('kdDiag', $req->kdDiag)->first();
+        if ($check == null) {
+            $n = new M_diagnosa;
+            $n->kdDiag = $req->kdDiag;
+            $n->nmDiag = $req->nmDiag;
+            $n->save();
+            Session::flash('success', 'Data Berhasil Disimpan');
+            return redirect('/superadmin/data/diagnosa/');
+        } else {
+            Session::flash('error', 'Kode Diagnosa Sudah Ada');
+            return redirect('/superadmin/data/diagnosa/');
+        }
+    }
+    public function update(Request $req)
+    {
+            $n = M_diagnosa::find($req->diagnosa_id);
+            $n->kdDiag = $req->kdDiag;
+            $n->nmDiag = $req->nmDiag;
+            $n->save();
+            Session::flash('success', 'Data Berhasil Diupdate');
+            return redirect('/superadmin/data/diagnosa/');
+    }
     public function store(Request $req)
     {
         foreach ($req->kdDiag as $key => $item) {
@@ -90,6 +114,13 @@ class DiagnosaController extends Controller
     public function delete($id, $id_diagnosa)
     {
         T_diagnosa::find($id_diagnosa)->delete();
+        Session::flash('success', 'Data Di hapus');
+        return back();
+    }
+
+    public function deleteData($id)
+    {
+        M_diagnosa::find($id)->delete();
         Session::flash('success', 'Data Di hapus');
         return back();
     }
